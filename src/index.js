@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-Endpoints 
+//Endpoints 
 app.get ('/health', (req, res) => {
     res.json({
         msg: 'Sition funca'
