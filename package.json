@@ -1,0 +1,14 @@
+{
+  "name": "crunchhouse",
+  "version": "1.0.0",
+  "description": "BackEnd Ecoommerce de comida",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./src/index.js"
+  },
+  "keywords": [],
+  "author": "DevolTime <yefriathertua@gmail.com>",
+  "contributors": ["Kevin Baez <kevindresbar@gmail.com>", "Andres <roandres730@gmail.com>"],
+  "license": "ISC",
+  "type": "commonjs"
+}
