@@ -13,6 +13,8 @@ app.get ('/health', (req, res) => {
 
 app.use('/users', require('./routes/user.routes.js'))
 
+
+
 app.listen(3000, () => {
     console.log(`server runing on http://localhost:3000`)
 })
