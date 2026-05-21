@@ -18,9 +18,9 @@ function updateUser(req, res) {
 
 
 function newUser (req, res) {
-    res.status(201).json({
+    res.json({
         msg: 'nuevo user'
     })
 }
 
-module.exports = { getUsers, deleteUser, updateUser, newUser }
+export { getUsers, deleteUser, updateUser, newUser };

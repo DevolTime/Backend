@@ -1,7 +1,9 @@
-const express = require('express');
-const { getUsers, deleteUser, updateUser, newUser} = require('../controllers/users.controller');
+import { Router } from "express";
 
-const router = express.Router();
+const router = Router();
+
+import { getUsers, deleteUser, updateUser, newUser} from '../controllers/users.controller.js';
+
 
 // Definicion de las rutas para lso usuarios
 router.get('/',getUsers)
@@ -12,4 +14,4 @@ router.patch('/', updateUser)
 
 router.post('/', newUser)
 
-module.exports = router;
+export default router;
