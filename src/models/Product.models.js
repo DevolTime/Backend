@@ -14,11 +14,7 @@ const ProductSchema = new Schema ({
         min : 0
 
     },
-    stock : {
-        type: Number,
-        default : 1,
-        min : 1
-
+  
     },
     status : {
         type: Boolean,
