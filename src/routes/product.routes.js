@@ -1,0 +1,13 @@
+import { Router } from "express";
+import { getproducts ,deleteproductos, postproducts, patchproducts } from "../controllers/product.controller.js";
+
+
+const router = Router ();
+
+// define rutas para productos
+router.get ("/" , getproducts) ;
+router.delete ("/", deleteproductos);
+router.post ("/", postproducts);
+router.patch("/", patchproducts );
+
+export default router;
