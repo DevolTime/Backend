@@ -10,6 +10,10 @@ const app = express();
 // base de datos
 crunchConnect();
 
+// Middlewares
+
+app.use(express.json()); // Habilita leer objetos Json
+
 //Endpoints 
 app.get ('/health', (req, res) => {
     res.json({
