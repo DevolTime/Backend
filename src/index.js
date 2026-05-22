@@ -13,6 +13,9 @@ const app = express();
 // base de datos
 crunchConnect();
 
+//MIddlewares
+app.use (express.json()); // habilitamos la interpretacion de objetos JSON
+
 //Endpoints 
 app.get ('/health', (req, res) => {
     res.json({

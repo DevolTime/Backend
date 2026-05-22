@@ -15,16 +15,18 @@ const ProductSchema = new Schema ({
 
     },
   
-    },
     status : {
-        type: Boolean,
-        enum: ["disponible ", "no disponible", "refactorizado", "pendiente", "enviado"],
-        default : true
+        type: String,
+        enum: ["disponible", "no disponible", "refactorizado", "pendiente", "enviado"],
+        default : "disponible"
 
-    },
+    }, 
 
     
-},{});
+},{
+     versionKey:false,
+        timestamps : true
+});
 
 // 2da parte : definir el modelo 
 
