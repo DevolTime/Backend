@@ -1,3 +1,6 @@
+import usermodel from "../models/user.model.js"
+import { insertUser } from "../services/user.services.js"
+
 function getUsers(req, res) {
     res.json({
         msg: 'listar usuarios'
@@ -16,11 +19,22 @@ function updateUser(req, res) {
     })
 }
 
+const newUser = async (req, res) => {
+    try {
+        const inputData = req.body
+        const data = await insertUser(inputData)
 
-function newUser (req, res) {
-    res.json({
-        msg: 'nuevo user'
-    })
+        res.json({
+            data: data
+
+        })
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            msg: 'no se registro el producto errorrrrr'
+        })
+    }
 }
 
 export { getUsers, deleteUser, updateUser, newUser };
