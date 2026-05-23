@@ -27,14 +27,14 @@ const createCategory = async (req, res) => {
     // Registra usando modelo y guarda la respeusta en la contante data.
     const data = await insertCategory(inputData);
 
-    // Respondemos al clente enviando los datos registrados.
+    // Respondemos al clente enviando los datos registrados. El codigo de estado cuando se crea un recurso nuevo con exito.
     res.status(201).json({
         data: data
     })
     } catch(error) {
-        console.error(error)
+        console.error(error)  // para la consola (Desarrollador)
 
-        //  Respondemos al cliente enviando un mensaje humano.
+        //  Respondemos al cliente enviando un mensaje humano. El codigo de este estado cuando el server falla.
         res.status(500).json({
             msg: 'No se pudo registrar la categoria'
         })

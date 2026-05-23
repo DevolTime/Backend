@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 
-
 // Primera parte: Definir esquema
 
 const CategorySchema = new Schema({

@@ -8,4 +8,4 @@ const insertCategory = async (newCategory) => {
 
 export {
     insertCategory
-}
+};
