@@ -1,11 +1,11 @@
 import express from 'express';
+const app = express();
 
 import crunchConnect from './config/mongo.config.js';
 
 import userRoutes from "./routes/user.routes.js";
 import CategoryRoutes from "./routes/category.routes.js";
 
-const app = express();
 
 // base de datos
 crunchConnect();
