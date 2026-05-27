@@ -16,7 +16,6 @@ function updateUser(req, res) {
     })
 }
 
-
 function newUser (req, res) {
     res.json({
         msg: 'nuevo user'

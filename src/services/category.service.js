@@ -2,10 +2,19 @@
 
 import CategoryModel from "../models/Category.model.js"
 
-const insertCategory = async (newCategory) => {
+const dbCreateCategory = async (newCategory) => {
     return await CategoryModel.create(newCategory)
 }
 
+const dbGetCategory = async () => {
+    return await CategoryModel.find();
+}
+
+const dbDeleteCategory = async (id) => {
+    return await CategoryModel.findOneAndDelete({ _id: id })
+    
+}
+
 export {
-    insertCategory
-};
+    dbCreateCategory, dbGetCategory, dbDeleteCategory
+}; 
