@@ -8,7 +8,6 @@ const app = express();
 //middlewares
 
 app.use(express.json()) //permite la interpretacion de los datos en formato json 
-
 // base de datos
 crunchConnect();
 
@@ -20,8 +19,7 @@ app.get ('/health', (req, res) => {
 })
 
 // Endpoints agrupados por entidad
-
-app.use('/users',userRoutes )
+ app.use('/users',userRoutes )
 
 
 

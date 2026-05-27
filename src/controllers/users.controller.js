@@ -1,12 +1,22 @@
 import usermodel from "../models/user.model.js"
-import { insertUser } from "../services/user.services.js"
+import { dbgetUsers, insertUser } from "../services/user.services.js"
 
-function getUsers(req, res) {
+const  getUsers= async (req, res) =>{
+    try { 
+         const data= await dbgetUsers()
     res.json({
-        msg: 'listar usuarios'
+        msg: 'listar usuarios',
+        data : data
     })
-}
+        
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            msg: 'no se Obtener infromacion de los usuarios'
+        });
+    }
 
+}
 function deleteUser(req, res) {
     res.json({
         msg: 'elimina un usuario'
@@ -25,6 +35,7 @@ const newUser = async (req, res) => {
         const data = await insertUser(inputData)
 
         res.json({
+            msg: 'obtener nuevo usuario ',
             data: data
 
         })
@@ -32,7 +43,7 @@ const newUser = async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(500).json({
-            msg: 'no se registro el producto errorrrrr'
+            msg: 'no se registro el usuario errorrrrr'
         })
     }
 }
