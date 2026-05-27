@@ -1,4 +1,5 @@
-import { dbGetCategory, dbCreateCategory, dbDeleteCategory } from "../services/category.service.js"
+import CategoryModel from "../models/Category.model.js";
+import { dbGetCategory, dbCreateCategory, dbDeleteCategory, dbUpdateCategory } from "../services/category.service.js"
 
 const getCategory = async (req, res) => {
 
@@ -37,10 +38,23 @@ const deleteCategory = async (req, res) => {
     }
 };
 
-const updateCategory = (req, res) => {
-    res.json({
-        msg: 'Actualiza una categorias'
-    });
+const updateCategory = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const inputData = req.body;
+
+        const data = await dbUpdateCategory(id, inputData)
+        //const data = await CategoryModel.findOneAndUpdate({ _id: id }, inputData)
+        res.json({
+            msg: 'Actualiza una categorias',
+            data: data
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'No se pudo actualizar la categoria por su id'
+        })
+    }
 };
 
 const createCategory = async (req, res) => {

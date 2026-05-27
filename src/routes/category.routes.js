@@ -8,7 +8,7 @@ import { createCategory, deleteCategory, getCategory, updateCategory } from "../
 // Define rutas de categorias
 router.get('/', getCategory);
 router.delete('/:id', deleteCategory);
-router.patch('/',updateCategory);
+router.patch('/:id',updateCategory);
 router.post('/', createCategory);
 
 

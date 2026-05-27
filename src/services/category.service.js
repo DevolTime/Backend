@@ -12,9 +12,12 @@ const dbGetCategory = async () => {
 
 const dbDeleteCategory = async (id) => {
     return await CategoryModel.findOneAndDelete({ _id: id })
-    
+}
+
+const dbUpdateCategory = async (id, inputData) =>{
+    return await CategoryModel.findByIdAndUpdate(id, inputData, {new: true});
 }
 
 export {
-    dbCreateCategory, dbGetCategory, dbDeleteCategory
+    dbCreateCategory, dbGetCategory, dbDeleteCategory, dbUpdateCategory
 }; 
