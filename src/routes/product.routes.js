@@ -6,7 +6,7 @@ const router = Router ();
 
 // define rutas para productos
 router.get ("/" , getproducts) ;
-router.delete ("/", deleteproductos);
+router.delete ("/:id", deleteproductos);
 router.post ("/", postproducts);
 router.patch("/", patchproducts );
 
