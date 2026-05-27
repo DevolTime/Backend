@@ -12,6 +12,10 @@ const dbDeleteproducts = async (id) => {
     return await ProductModel.findByIdAndDelete(id);
     
 }
+
+const dbUpdateproducts = async (id, inputData) => {
+    return await ProductModel.findByIdAndUpdate(id, inputdata)
+}
 export {
-    insertproduct, dbGetproducts, dbDeleteproducts
+    insertproduct, dbGetproducts, dbDeleteproducts, 
 }

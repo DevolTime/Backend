@@ -8,6 +8,6 @@ const router = Router ();
 router.get ("/" , getproducts) ;
 router.delete ("/:id", deleteproductos);
 router.post ("/", postproducts);
-router.patch("/", patchproducts );
+router.patch("/:id", patchproducts );
 
 export default router;

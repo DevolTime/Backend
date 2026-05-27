@@ -60,10 +60,23 @@ msg: "hola chao"
 
 
 }
-const patchproducts = (req, res) => {
-    res.json({
-        msg: "actualizar productos"
+const patchproducts = async (req, res) => {
+    try {
+const id = req.params.id ; //id de la ruta para encontrar el documento que quiero actualizar 
+
+    const inputData = req.body; // obteniendo el objeto con el /los parametros que quiero actualizar
+const data = await ProductModel.findByIdAndUpdate (id, inputData, {new : true }) ;
+ res.json({
+        msg: "actualizar productos",
+        data: data
+    });
+
+    } catch (error) {
+    console.error(error)
+    res.status (500).json({
+msg: "hola chao"
     })
+    }
 }
 
 export {
