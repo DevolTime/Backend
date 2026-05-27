@@ -8,9 +8,9 @@ import { getUsers, deleteUser, updateUser, newUser} from '../controllers/users.c
 // Definicion de las rutas para lso usuarios
 router.get('/',getUsers)
 
-router.delete('/', deleteUser)
+router.delete('/:id', deleteUser)
 
-router.patch('/', updateUser)
+router.patch('/:id', updateUser)
 
 router.post('/', newUser)
 

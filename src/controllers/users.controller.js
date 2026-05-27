@@ -1,5 +1,5 @@
 import usermodel from "../models/user.model.js"
-import { dbgetUsers, insertUser } from "../services/user.services.js"
+import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
 const  getUsers= async (req, res) =>{
     try { 
@@ -17,22 +17,50 @@ const  getUsers= async (req, res) =>{
     }
 
 }
-function deleteUser(req, res) {
+const deleteUser =async(req, res)=> {
+try {
+    const id = req.params.id;
+   const data =  await dbdeleteUser(id);
+
     res.json({
-        msg: 'elimina un usuario'
+        msg: 'elimina un usuario',
+        data: data
     })
+    
+} catch (error) {
+       console.error(error)
+        res.status(500).json({
+            msg: 'no se pudo eliminar el usuario'
+        });
+    
 }
 
-function updateUser(req, res) {
+}
+
+const updateUser =  async (req, res) => {
+    try {
+    const id = req.params.id  // obtiene el id que sesea hacerel la modidicacion
+    const inputData = req.body; // onteniendo el objetivoc con el /los parametros que quiero actulaizar 
+   const data = await dbupdateUser (id, inputData)
+
     res.json({
-        msg: 'actualiza un usuario'
+        msg: 'actualiza un usuario',
+        data : data
     })
+        
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            msg: 'no se puedo actualziar el usuario errorrrr el usuario errorrrrr'
+        })
+    }
+    
 }
 
 const newUser = async (req, res) => {
     try {
         const inputData = req.body
-        const data = await insertUser(inputData)
+        const data = await dbnewUser(inputData)
 
         res.json({
             msg: 'obtener nuevo usuario ',
