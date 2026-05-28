@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import CategoryModel from "../models/Category.model.js";
 import { dbGetCategory, dbCreateCategory, dbDeleteCategory, dbUpdateCategory, dbGetCategoryById } from "../services/category.service.js"
 
@@ -23,6 +24,13 @@ const deleteCategory = async (req, res) => {
     try {
         const id = req.params.id;
 
+        // validacion defensiva: condicionamos antes que ocurra el error (no pasa)
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                msg: 'No se pudo eliminar la categoria ya que el id proporcionado es invalido'
+            })
+        }
+
         const data = await dbDeleteCategory(id);
 
         res.json({
@@ -42,6 +50,14 @@ const getCategoryById = async (req, res) => {
 
     try {
         const id = req.params.id;
+
+        // validacion defensiva: condicionamos antes que ocurra el error (no pasa)
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                msg: 'No se pudo buscar la categorua ya que el id proporcionado es invalido'
+            })
+        }
+
         const data = await dbGetCategoryById(id);
 
         res.json({
@@ -54,9 +70,8 @@ const getCategoryById = async (req, res) => {
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
         })
-    }
-
-}
+    };
+};
 
 const updateCategory = async (req, res) => {
     try {
@@ -71,6 +86,14 @@ const updateCategory = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
+
+        // Validacion exepcion: Manejar cuando ocurre el error
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                msg: 'No se pudo actualizar la categoria ya que el ID proporcioando es invalido'
+            })
+        }
+
         res.status(500).json({
             msg: 'No se pudo actualizar la categoria por su id'
         })
@@ -99,4 +122,4 @@ const createCategory = async (req, res) => {
     };
 };
 
-export { getCategory, deleteCategory, updateCategory, createCategory , getCategoryById}
+export { getCategory, deleteCategory, updateCategory, createCategory, getCategoryById }

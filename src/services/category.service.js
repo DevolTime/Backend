@@ -14,11 +14,11 @@ const dbDeleteCategory = async (id) => {
     return await CategoryModel.findOneAndDelete({ _id: id })
 }
 
-const dbUpdateCategory = async (id, inputData) =>{
-    return await CategoryModel.findByIdAndUpdate(id, inputData, {new: true});
+const dbUpdateCategory = async (id, inputData) => {
+    return await CategoryModel.findByIdAndUpdate(id, inputData, { new: true });
 }
 
-const dbGetCategoryById = async ( id ) => {
+const dbGetCategoryById = async (id) => {
     return await CategoryModel.findOne({ _id: id });
 }
 
