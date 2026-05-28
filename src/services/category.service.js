@@ -18,6 +18,10 @@ const dbUpdateCategory = async (id, inputData) =>{
     return await CategoryModel.findByIdAndUpdate(id, inputData, {new: true});
 }
 
+const dbGetCategoryById = async ( id ) => {
+    return await CategoryModel.findOne({ _id: id });
+}
+
 export {
-    dbCreateCategory, dbGetCategory, dbDeleteCategory, dbUpdateCategory
+    dbCreateCategory, dbGetCategory, dbDeleteCategory, dbUpdateCategory, dbGetCategoryById
 }; 

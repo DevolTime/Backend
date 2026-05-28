@@ -1,5 +1,5 @@
 import CategoryModel from "../models/Category.model.js";
-import { dbGetCategory, dbCreateCategory, dbDeleteCategory, dbUpdateCategory } from "../services/category.service.js"
+import { dbGetCategory, dbCreateCategory, dbDeleteCategory, dbUpdateCategory, dbGetCategoryById } from "../services/category.service.js"
 
 const getCategory = async (req, res) => {
 
@@ -37,6 +37,26 @@ const deleteCategory = async (req, res) => {
         })
     }
 };
+
+const getCategoryById = async (req, res) => {
+
+    try {
+        const id = req.params.id;
+        const data = await dbGetCategoryById(id);
+
+        res.json({
+            msg: 'Obtiene una Categoria por id',
+            data: data
+        })
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            msg: 'No se pudo encontrar la categoria'
+        })
+    }
+
+}
 
 const updateCategory = async (req, res) => {
     try {
@@ -79,4 +99,4 @@ const createCategory = async (req, res) => {
     };
 };
 
-export { getCategory, deleteCategory, updateCategory, createCategory }
+export { getCategory, deleteCategory, updateCategory, createCategory , getCategoryById}
