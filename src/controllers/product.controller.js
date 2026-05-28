@@ -1,9 +1,11 @@
+import mongoose from "mongoose";
 import ProductModel from "../models/Product.models.js";
 import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } from '../service/product.service.js'
 
 const getproducts = async (req, res) => {
     try {
         const data = await dbGetproducts();
+        
 
         res.json({
             msg: "obtener todos los productos",
@@ -23,6 +25,11 @@ const deleteproductos = async (req, res) => {
     try {
         const id = req.params.id;
         const data = await dbDeleteproducts(id);
+         if (! mongoose.Types.ObjectId.isValid(id)){
+    return res.status(400).json({
+    msg: "el ID proporcionado no se ha podido elimar porque es invalido"            
+    });
+ }
 
         res.json({
             msg: "eliminar productos",
@@ -66,6 +73,12 @@ const postproducts = async (req, res) => {
 const getproductsById = async (req, res) => {
     try {
  const id = req.params.id;
+ //VALIDACION DEFENSIVA : CONDICIONAMOS PREVIO A QUE OCURRA EL ERROR  (NUNCA OCURRE)
+ if (! mongoose.Types.ObjectId.isValid(id)){
+    return res.status(400).json({
+        msg: "el ID proporcionado es invalido"
+    });
+ }
     const data = await dbGetproductsById(id);
     res.json({
         msg: ("obtiene un producto por id"),
@@ -96,6 +109,12 @@ const patchproducts = async (req, res) => {
 
     } catch (error) {
         console.error(error)
+        //validacion execption: manejar cuando ocurre el error
+        if (error.name === "CastError") {
+            return res.status(400).json({
+                msg : "no se pudo actulizar el producto porque el ID es invalido"
+            });
+        }
         res.status(500).json({
             msg: "hola chao"
         })
