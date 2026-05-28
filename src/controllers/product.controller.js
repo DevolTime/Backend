@@ -64,13 +64,23 @@ const postproducts = async (req, res) => {
 }
 
 const getproductsById = async (req, res) => {
-    const id = req.params.id;
+    try {
+ const id = req.params.id;
     const data = await dbGetproductsById(id);
     res.json({
         msg: ("obtiene un producto por id"),
         data: data
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json ({
+            msg:"error al"
+        });
 
-    });
+    }
+   
+
+    
 }
 
 const patchproducts = async (req, res) => {
