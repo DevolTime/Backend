@@ -32,6 +32,13 @@ const deleteCategory = async (req, res) => {
         }
 
         const data = await dbDeleteCategory(id);
+        //  Validacion
+        if (! data) {
+            return res.status(400).json ({
+                msg: 'No se puede eliminar una categoria que no se encuentra registrado'
+            })
+        }
+
 
         res.json({
             msg: 'Eliminar una categorias',
@@ -60,6 +67,13 @@ const getCategoryById = async (req, res) => {
 
         const data = await dbGetCategoryById(id);
 
+         //  Validacion
+        if (! data) {
+            return res.status(400).json ({
+                msg: 'No se puede buscar una categoria que no se encuentra registrado'
+            })
+        }
+
         res.json({
             msg: 'Obtiene una Categoria por id',
             data: data
@@ -79,6 +93,7 @@ const updateCategory = async (req, res) => {
         const inputData = req.body;
 
         const data = await dbUpdateCategory(id, inputData)
+
         //const data = await CategoryModel.findOneAndUpdate({ _id: id }, inputData)
         res.json({
             msg: 'Actualiza una categorias',
@@ -114,6 +129,13 @@ const createCategory = async (req, res) => {
         });
     } catch (error) {
         console.error(error)  // para la consola (Desarrollador)
+
+        // Validacion si la propiedad no es unico
+        if (error.code === 11000) {
+            res.json({
+                msg: 'Error de validacion por duplicidad en propiedades unicas'
+            })
+        }
 
         //  Respondemos al cliente enviando un mensaje humano. El codigo de este estado cuando el server falla.
         res.status(500).json({

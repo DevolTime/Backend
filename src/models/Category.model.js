@@ -7,7 +7,8 @@ const CategorySchema = new Schema({
         type: String,
         required: true,
         minLength: 5,
-        trim: true
+        trim: true,
+        unique: true
     },
     description: String,
     stock: {
