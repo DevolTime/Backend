@@ -25,6 +25,14 @@ const deleteproductos = async (req, res) => {
     try {
         const id = req.params.id;
         const data = await dbDeleteproducts(id);
+        //validacion 
+        if (data){
+            return res.json(
+                {
+                    msg :"No se puede eliminar un producto que no se encuentra registrado"
+                }
+            )
+        }
          if (! mongoose.Types.ObjectId.isValid(id)){
     return res.status(400).json({
     msg: "el ID proporcionado no se ha podido elimar porque es invalido"            
@@ -102,6 +110,15 @@ const patchproducts = async (req, res) => {
 
         const inputData = req.body; // obteniendo el objeto con el /los parametros que quiero actualizar
         const data = await ProductModel.findByIdAndUpdate(id, inputData, { new: true });
+         if (data){
+            
+            throw new  error("no se pudo actualizar el producto")
+               if (error.message.includes("no se pudo actualizar el producto")) {
+                return res.json ({
+                    msg: error.message
+                });
+               }
+        }
         res.json({
             msg: "actualizar productos",
             data: data
