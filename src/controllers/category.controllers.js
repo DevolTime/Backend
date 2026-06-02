@@ -16,9 +16,10 @@ const getCategory = async (req, res) => {
 
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
-        })>>>>>>> refs/remotes/origin/main
-    };
-};
+        })
+    }
+}
+
 
 const deleteCategory = async (req, res) => {
     try {

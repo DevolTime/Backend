@@ -10,7 +10,6 @@ import storeRoutes from './routes/stores.routes.js'
 //middlewares
 
 app.use(express.json()) //permite la interpretacion de los datos en formato json 
-remotes/origin/main
 
 // base de datos
 crunchConnect();
