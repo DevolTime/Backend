@@ -1,16 +1,22 @@
 import express from 'express';
+const app = express();
 
 import crunchConnect from './config/mongo.config.js';
 
 import userRoutes from "./routes/user.routes.js";
 
-const app = express();
+import CartRoutes from "./routes/cart.routes.js";
+
 
 // base de datos
 crunchConnect();
 
+// Middlewares
+
+app.use(express.json()); // Habilita leer objetos Json
+
 //Endpoints 
-app.get ('/health', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({
         msg: 'Sition funca'
     })
@@ -18,7 +24,9 @@ app.get ('/health', (req, res) => {
 
 // Endpoints agrupados por entidad
 
-app.use('/users',userRoutes )
+app.use('/users', userRoutes)
+
+app.use('/cart', CartRoutes)
 
 app.listen(3000, () => {
     console.log(`server runing on http://localhost:3000`)
