@@ -1,5 +1,5 @@
 import pedidosModel  from "../models/models.pedidos.js";
-import { createpedido, getpedido, deletepedido, updatepedido} from "../service/pedidos.service.js";
+import { createpedido, getpedido, deletepedido, updatepedido} from "../services/pedidos.service.js";
 const getPedido = async  (req, res) => {
     try {
         const data = await getpedido ();

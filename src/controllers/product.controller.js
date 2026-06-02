@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import ProductModel from "../models/Product.models.js";
-import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } from '../service/product.service.js'
+import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } from '../services/product.service.js'
 
 const getproducts = async (req, res) => {
     try {
