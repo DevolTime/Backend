@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-const storeShema = Schema({
+import { model, Schema } from "mongoose";
+const storeShema = new Schema({
 _id:{
     type:String,
     unique:true
@@ -7,6 +7,10 @@ _id:{
 name:{
     type:String,
     require: true
+},
+country:{
+     type:String,
+    require:true
 },
 city:{
     type:String,
@@ -17,7 +21,7 @@ address:{
     require: true
 },
 phone:{
-    type:Number,
+    type:String,
     require:true
 },
 status:{
@@ -25,9 +29,11 @@ status:{
     enum :['abierto','cerrado'],
     default: 'abierto'
 
-}
+}},{
+    versionKey: false,
+    timestamps: true,
 
 })
-const storesmodel = ('stores', storesShema)
+const storemodel = model ('store', storeShema)
 
-export default storeShema
+export default storemodel
