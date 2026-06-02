@@ -2,15 +2,15 @@ import { Router } from "express";
 
 const router = Router();
 
-import { getUsers, deleteUser, updateUser, newUser} from '../controllers/users.controller.js';
+import { getUsers, deleteUser, updateUser, newUser } from '../controllers/users.controller.js';
 
 
 // Definicion de las rutas para los usuarios
-router.get('/',getUsers)
+router.get('/', getUsers)
 
-router.delete('/', deleteUser)
+router.delete('/:id', deleteUser)
 
-router.patch('/', updateUser)
+router.patch('/:id', updateUser)
 
 router.post('/', newUser)
 

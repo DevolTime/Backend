@@ -42,7 +42,7 @@ const getCartById = async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        
+
         res.status(500).json({
             msg: 'No se pudo obtener el Carrito'
         })
@@ -123,4 +123,4 @@ const DeleteCart = async (req, res) => {
     }
 };
 
-export {getCart, getCartById, createCart, updateCart, DeleteCart }
+export { getCart, getCartById, createCart, updateCart, DeleteCart }

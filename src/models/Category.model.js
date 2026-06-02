@@ -24,7 +24,8 @@ const CategorySchema = new Schema({
         type: Boolean,
         default: true,
     }
-}, {versionKey:false,
+}, {
+    versionKey: false,
     timestamps: true,
 });
 

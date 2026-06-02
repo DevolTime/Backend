@@ -16,7 +16,7 @@ const getCategory = async (req, res) => {
 
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
-        })
+        })>>>>>>> refs/remotes/origin/main
     };
 };
 
@@ -33,8 +33,8 @@ const deleteCategory = async (req, res) => {
 
         const data = await dbDeleteCategory(id);
         //  Validacion
-        if (! data) {
-            return res.status(400).json ({
+        if (!data) {
+            return res.status(400).json({
                 msg: 'No se puede eliminar una categoria que no se encuentra registrado'
             })
         }
@@ -67,9 +67,9 @@ const getCategoryById = async (req, res) => {
 
         const data = await dbGetCategoryById(id);
 
-         //  Validacion
-        if (! data) {
-            return res.status(400).json ({
+        //  Validacion
+        if (!data) {
+            return res.status(400).json({
                 msg: 'No se puede buscar una categoria que no se encuentra registrado'
             })
         }
