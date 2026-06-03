@@ -11,7 +11,7 @@ const dbGetCategory = async () => {
 }
 
 const dbDeleteCategory = async (id) => {
-    return await CategoryModel.findOneAndDelete({ _id: id })
+    return await CategoryModel.findOneAndDelete(id)
 }
 
 const dbUpdateCategory = async (id, inputData) => {
@@ -19,7 +19,7 @@ const dbUpdateCategory = async (id, inputData) => {
 }
 
 const dbGetCategoryById = async (id) => {
-    return await CategoryModel.findOne({ _id: id });
+    return await CategoryModel.findOne(id);
 }
 
 export {

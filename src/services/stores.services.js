@@ -5,13 +5,13 @@ const dbnewStore = async (newStore) => {
 }
 
 const dbupdateStore = async (id, inputData) => {
-   return await storemodel.findByIdAndUpdate({ _id: id }, inputData)
+   return await storemodel.findByIdAndUpdate( id , inputData)
 }
 const dbgetStore = async () => {
    return await storemodel.find();
 }
 const dbdeleteStore = async (id) => {
-   return await storemodel.findOneAndDelete({ _id: id })
+   return await storemodel.findOneAndDelete( id )
 }
 export {
    dbdeleteStore,

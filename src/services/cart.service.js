@@ -9,7 +9,7 @@ const dbGetCart = async () => {
 };
 
 const dbGetCartById = async (id) => {
-    return await CartModel.findOne({ _id: id })
+    return await CartModel.findOne(id)
 };
 
 const dbUpdateCart = async (id, inputData) => {
@@ -17,7 +17,7 @@ const dbUpdateCart = async (id, inputData) => {
 };
 
 const dbDeleteCart = async (id) => {
-    return await CartModel.findByIdAndDelete({ _id: id })
+    return await CartModel.findByIdAndDelete(id )
 }
 
 export { dbCreateCart, dbGetCart, dbGetCartById, dbUpdateCart, dbDeleteCart }

@@ -8,7 +8,7 @@ const getpedido = async ()=> {
 }
 
 const deletepedido = async (id) => {
-    return await pedidosModel.findOneAndDelete({_id: id});
+    return await pedidosModel.findOneAndDelete(id);
     return await pedidosModel.findByIdAndDelete(id);
 }
 const updatepedido = async(id)=>{

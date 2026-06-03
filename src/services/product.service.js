@@ -6,14 +6,14 @@ const insertproduct = async (newProduct)=>{
 }
 const dbGetproducts = async (id) => {
     
-    return await ProductModel.findOne({_id: id});
+    return await ProductModel.findOne(id);
 }
 const dbGetproductsById = async (id) => {
     
-    return await ProductModel.findOne ({_id: id});
+    return await ProductModel.findOne (id);
 }
 const dbDeleteproducts = async (id) => {
-    return await ProductModel.findOneAndDelete({_id: id});
+    return await ProductModel.findOneAndDelete(id);
     return await ProductModel.findByIdAndDelete(id);
     
 }

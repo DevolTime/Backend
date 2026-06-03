@@ -1,9 +1,5 @@
 import { model, Schema } from "mongoose";
 const storeShema = new Schema({
-    _id: {
-        type: String,
-        unique: true
-    },
     name: {
         type: String,
         require: true
