@@ -3,11 +3,6 @@ import { Schema, model } from "mongoose";
 // 1era parte para definir el esquema 
 
 const userShema = new Schema({
-    _id: {
-        type: String,
-        unique: true
-
-    },
     name: {
         type: String,
         required: true

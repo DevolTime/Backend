@@ -7,11 +7,8 @@ import { getUsers, deleteUser, updateUser, newUser } from '../controllers/users.
 
 // Definicion de las rutas para los usuarios
 router.get('/', getUsers)
-
 router.delete('/:id', deleteUser)
-
 router.patch('/:id', updateUser)
-
 router.post('/', newUser)
 
 export default router;

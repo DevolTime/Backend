@@ -16,10 +16,10 @@ const dbupdateUser = async (id, inputData) => {
     return await usermodel.findByIdAndUpdate(id, inputData)
 }
 
+const dbGetUserByEmail = async (email) => {
+    return await usermodel.findOne({ email: email.toLowerCase() })
+}
 
 export {
-    dbgetUsers,
-    dbnewUser,
-    dbdeleteUser,
-    dbupdateUser
+    dbgetUsers, dbnewUser, dbdeleteUser, dbupdateUser, dbGetUserByEmail
 }

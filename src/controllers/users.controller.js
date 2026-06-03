@@ -1,3 +1,4 @@
+import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
@@ -61,12 +62,14 @@ const updateUser = async (req, res) => {
 const newUser = async (req, res) => {
     try {
         const inputData = req.body
+
+        inputData.password = encryptedPassword(inputData.password);
+
         const data = await dbnewUser(inputData)
 
         res.json({
             msg: 'obtener nuevo usuario ',
             data: data
-
         })
 
     } catch (error) {

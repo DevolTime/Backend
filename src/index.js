@@ -9,7 +9,7 @@ import productsRoutes from "./routes/product.routes.js"
 import CategoryRoutes from "./routes/category.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
-
+import AuthRoutes from "./routes/auth.routes.js";
 
 //middlewares
 
@@ -28,13 +28,12 @@ app.get('/health', (req, res) => {
 
 // Endpoints agrupados por entidad
 app.use('/users',userRoutes )
-app.use('/Category', CategoryRoutes)
+app.use('/category', CategoryRoutes)
 app.use('/cart', CartRoutes)
 app.use('/stores',storeRoutes)
-
 app.use ('/pedidos', pedidos)
-
 app.use("/products", productsRoutes)
+app.use('/auth', AuthRoutes)
 
 
 
