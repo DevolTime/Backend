@@ -1,4 +1,5 @@
-import encrypedPassword from "../helpers/bcrypt.helper.js"
+
+import { encrypedPassword } from "../helpers/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
@@ -62,8 +63,14 @@ const updateUser = async (req, res) => {
 const newUser = async (req, res) => {
     try {
         const inputData = req.body
-        inputData.password = encrypedPassword(inputData.password)
+        password = encrypedPassword(inputData.password)
         const data = await dbnewUser(inputData)
+        if (password == null) {
+             throw new Error('olvido pasar la propiedad password en el login ')
+            
+        }
+        inputData.password = password;
+
 
         res.json({
             msg: 'obtener nuevo usuario ',

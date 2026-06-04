@@ -1,8 +1,7 @@
-import bcrpt, { hash, hashSync } from 'bcrypt'
+import bcrpt, { hash, hashSync, compareSync } from 'bcrypt'
 const encrypedPassword = (originalPassword)=>{
-    //genera una cadena aleatoria
-const salt = bcrpt.genSaltSync(4);
-
+    try {
+        const salt = bcrpt.genSaltSync(4);
 
 // encripta la contraseña
 
@@ -12,6 +11,25 @@ const hashPassword = hashSync(
 )
 //encriptado listo pa registro
 return hashPassword
-
 }
-export default encrypedPassword
+    catch (error) {
+          console.error(error);
+          
+    return null;
+    }}
+    //genera una cadena aleatoria
+
+
+const validatePassword = (originalPassword, hashPassword)=>{
+try {
+      const isValid = compareSync(originalPassword, hashPassword)
+
+     return isValid
+} catch (error) {
+     console.error(error);
+    return null;
+    
+}
+    }
+export{encrypedPassword,
+     validatePassword}

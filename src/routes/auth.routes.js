@@ -9,6 +9,10 @@ const router = Router();
 router.post('/login', loginUser )
 // registrer
 router.post('/register',newUser )
+
+//renew token 
+
+
 //remember paswrod 
 // remeber user
 //renew token 
