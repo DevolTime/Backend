@@ -5,7 +5,12 @@ import { dbGetUserByEmail } from "../services/user.services.js"
 import { generaToken } from "../helpers/jwt.helper.js"
 
 const loginUser = async (req, res) => {
-    const inputData = req.body // paso 1 extraer los datos que se ingresan 
+    try {
+        const inputData = req.body // paso 1 extraer los datos que se ingresan 
+    if (!inputData.password) {
+        throw new Error('se olviso pasar la propiedad password en el login ')
+        
+    }
 
     // paso 2 verifica si el usaurio esta registrado 
     const userFound = await dbGetUserByEmail(inputData.email)
@@ -46,7 +51,28 @@ delete userFoundObj.password;
         data: userFoundObj
     })
 
+    } catch (error) {
+        console.error(error)
+        if (error.message.includes('se me olvido pasar'),
+        error.message.includes('el usuario no exite '),
+        error.message.includes('las credenciales no son validas')
+    ){  return res.status(400).json({msg: error.mesage});}
+
+if (error.message.includes('no se puedo generar el token de acceso')) {
+    return res.status(500).json({
+        msg:error.message
+    })
+    res.status(500).json({
+        msg: 'ocurrio un error en el servidor durante el login'
+    })
+}}
+
+}   
+
+const reNewToken = async (req, res)=>{
+    res.json({
+        msg:'aqui se renueva el token'
+    })
 }
-export {
-    loginUser
-}
+
+    export { loginUser,reNewToken}

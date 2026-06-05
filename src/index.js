@@ -27,11 +27,11 @@ app.get('/health', (req, res) => {
 })
 
 // Endpoints agrupados por entidad
-app.use('/api/users',userRoutes )
+app.use('/api/users', userRoutes)
 app.use('/api/Category', CategoryRoutes)
 app.use('/api/cart', CartRoutes)
-app.use('/api/stores',storeRoutes)
-app.use ('/api/pedidos', pedidos)
+app.use('/api/stores', storeRoutes)
+app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
 
 app.use("/products", productsRoutes)

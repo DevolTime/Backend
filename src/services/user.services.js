@@ -16,8 +16,11 @@ const dbupdateUser = async (id, inputData) => {
     return await usermodel.findByIdAndUpdate(id, inputData)
 }
 
-const dbGetUserByEmail = async (email)=>{
-    return await usermodel.findOne({email:email.toLowerCase()})
+const dbGetUserByEmail = async (email) => {
+    if (!email) {throw new Error ('se olvido la propiedad email en el login')}
+
+    
+    return await usermodel.findOne({ email: email.toLowerCase() })
 }
 export {
     dbgetUsers,

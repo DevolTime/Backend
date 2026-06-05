@@ -8,6 +8,17 @@ try {
     return null;
 }
 }
+const verifyToken= (token)=>{
+
+try {
+     const playload = jwt.verify(token, 'jijijij')
+     return playload
+} catch (error) {
+     console.error(error);
+     return null
+}
 
 
-export  {generaToken}
+}
+
+export  {generaToken, verifyToken}
