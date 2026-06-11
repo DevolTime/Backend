@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import { newUser } from '../controllers/users.controller.js';
-import { loginUser } from '../controllers/auth.controllers.js';
+import { loginUser, reNewToken } from '../controllers/auth.controllers.js';
+import authoriztionUser from '../middlewares/authentication.middleware.js';
 
 const router = Router();
 
@@ -10,9 +11,13 @@ router.post('/login', loginUser)
 
 // register
 router.post('/register', newUser)
+
+// renew-token
+router.get('/renew-token', authoriztionUser, reNewToken)
+
+
 // remember-password
 // remember-user
-// renew-token
 // activate-account
 // deactivated-account
 //double-authentication

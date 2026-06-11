@@ -64,19 +64,49 @@ const newUser = async (req, res) => {
         const inputData = req.body
 
         inputData.password = encryptedPassword(inputData.password);
-
         const data = await dbnewUser(inputData)
 
-        res.json({
+        res.status(201).json({
             msg: 'obtener nuevo usuario ',
             data: data
         })
 
     } catch (error) {
-        console.error(error)
+        // A. Capturar error lanzado: Propiedad password omitida
+        if (error.message.includes('Se olvidó pasar la propiedad password')) {
+            return res.status(400).json({
+                msg: error.message
+            });
+        }
+
+        // B. Controlar errores de validación de campos de Mongoose (Reglas del Schema)
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+
+            return res.status(400).json({
+                msg: 'Error de validación en los datos del usuario',
+                errors: messages
+            });
+        }
+
+        // C. Controlar errores de índices únicos de MongoDB (Código 11000)
+        if (error.code === 11000) {
+            const duplicatedField = Object.keys(error.keyValue)[0];
+
+            const errorMessages = {
+                email: 'El correo electrónico ya se encuentra registrado por otro usuario',
+                nickname: 'El nickname ya se encuentra en uso por otro usuario'
+            };
+
+            return res.status(400).json({
+                msg: errorMessages[duplicatedField] || 'Ya existe un registro con algunos de estos valores únicos'
+            });
+        }
+
+        // D. Error general interno del servidor
         res.status(500).json({
-            msg: 'no se registro el usuario errorrrrr'
-        })
+            msg: 'No se pudo registrar el usuario'
+        });
     }
 }
 

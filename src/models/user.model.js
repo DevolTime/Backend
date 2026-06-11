@@ -15,11 +15,13 @@ const userShema = new Schema({
     password: {
         type: String,
         trim: true,
+        required: true
     },
     email: {
         type: String,
-        unique: true
-
+        unique: true,
+        required: true,
+        lowercase: true
     },
     status: {
         type: String,

@@ -120,6 +120,10 @@ const createCategory = async (req, res) => {
     try {
         // Obtengo los datos enviados en la peticion.
         const inputData = req.body;
+        const payload = req.payload;
+        const id = payload._id;
+
+        inputData.createdBy = id; // asigna el id del usuario logeado 
 
         // Registra usando modelo y guarda la respeusta en la contante data.
         const data = await dbCreateCategory(inputData);

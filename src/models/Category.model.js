@@ -16,13 +16,17 @@ const CategorySchema = new Schema({
         default: 1,
         min: 1
     },
-    image: {
+    urlImage: {
         type: String,
         default: null
     },
     status: {
         type: Boolean,
         default: true,
+    },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 }, {
     versionKey: false,
