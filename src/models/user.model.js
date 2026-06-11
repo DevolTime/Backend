@@ -19,13 +19,23 @@ const userShema = new Schema({
     },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        lowercase:true,
+    
 
     },
     status: {
         type: String,
         enum: [`disponible`, `no disponible`, `pendiente`],
         default: `disponible`
+    },
+    avatar :{
+        type: String,
+        default:''
+    },
+    createBy: {
+        type : Schema.Types.ObjectId,
+        ref: "user"
     }
 
 }, {

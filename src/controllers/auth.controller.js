@@ -2,7 +2,7 @@
 
 import { validatePassword } from "../helpers/bcrypt.helper.js"
 import { dbGetUserByEmail } from "../services/user.services.js"
-import { generaToken } from "../helpers/jwt.helper.js"
+import { generateToken } from "../helpers/jwt.helper.js"
 
 const loginUser = async (req, res) => {
     try {
@@ -34,9 +34,10 @@ const loginUser = async (req, res) => {
         name : userFound.name,
         email: userFound.email,
         status: userFound.status,
+        avatar: userFound.avatar
     }
 
-const token = generaToken(payload)
+const token = generateToken(payload)
 
 
 //paso 5 convertir un bjson a jsn para eliminar propiedades
@@ -53,10 +54,10 @@ delete userFoundObj.password;
 
     } catch (error) {
         console.error(error)
-        if (error.message.includes('se me olvido pasar'),
-        error.message.includes('el usuario no exite '),
+        if (error.message.includes('se me olvido pasar') ||
+        error.message.includes('el usuario no exite ')||
         error.message.includes('las credenciales no son validas')
-    ){  return res.status(400).json({msg: error.mesage});}
+    ){  return res.status(400).json({msg: error.message});}
 
 if (error.message.includes('no se puedo generar el token de acceso')) {
     return res.status(500).json({
@@ -69,9 +70,44 @@ if (error.message.includes('no se puedo generar el token de acceso')) {
 
 }   
 
+//obtener los datos del usuarioy la carga util del minddelware
+
 const reNewToken = async (req, res)=>{
+    //obtener los datos del usuarioy la carga util del minddelware
+
+const payload = req.payload
+const user = req.user
+ //usuario que se va a generar el nuevo token existe o esta activo 
+ const userFound= await dbGetUserByEmail(payload.email)
+ 
+ if(!userFound){
+    return res.status(400).json({
+        msg: 'no se renueva el token para el usuario eliminado'
+    })
+ }
+ //paso tres generar un nuevo toekn a partir de los datos registrados
+
+  const newPayload = {
+        _id: userFound._id,
+        name : userFound.name,
+        email: userFound.email,
+        status: userFound.status,
+        avatar: userFound.avatar
+    }
+    //creacion nuevo token 
+
+const token = generateToken(newPayload)
+//eliminar propiedades sensibles
+
+const userFoundObj = userFound.toObject()
+delete userFoundObj.password;
+    delete userFoundObj.createdAt;
+    delete userFoundObj.updatedAt;
+
     res.json({
-        msg:'aqui se renueva el token'
+        msg:'aqui se renueva el token',
+        token, 
+        data:userFoundObj
     })
 }
 

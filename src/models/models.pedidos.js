@@ -14,8 +14,8 @@ const pedidosSchema = new Schema({
     domiciliario_id: {
         type: String,
         default: null
-    },
-    precio_total: {
+    },precio_total: 
+    {
         type: Number,   
         required: true,
         min: 0
@@ -34,6 +34,10 @@ const pedidosSchema = new Schema({
         required: true,
         // maxLength: 200,
 
+    },
+    createBy: {
+        type : Schema.Types.ObjectId,
+        ref: "user"
     }
 }, {
     versionKey: false,

@@ -24,8 +24,11 @@ const storeShema = new Schema({
         type: String,
         enum: ['abierto', 'cerrado'],
         default: 'abierto'
-
-    }
+    },
+    createBy: {
+            type : Schema.Types.ObjectId,
+            ref: "user"
+        }
 }, {
     versionKey: false,
     timestamps: true,

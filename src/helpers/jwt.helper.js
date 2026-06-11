@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-const generaToken=(payload)=>{
+const generateToken=(payload)=>{
 try {
      const token = jwt.sign(payload, 'jijijij',{expiresIn:'1d'} )
      return token
@@ -11,8 +11,8 @@ try {
 const verifyToken= (token)=>{
 
 try {
-     const playload = jwt.verify(token, 'jijijij')
-     return playload
+     const payload = jwt.verify(token, 'jijijij')
+     return payload
 } catch (error) {
      console.error(error);
      return null
@@ -21,4 +21,4 @@ try {
 
 }
 
-export  {generaToken, verifyToken}
+export  {generateToken, verifyToken}

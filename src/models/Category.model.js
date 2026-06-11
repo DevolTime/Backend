@@ -23,6 +23,10 @@ const CategorySchema = new Schema({
     status: {
         type: Boolean,
         default: true,
+    },
+    createBy: {
+        type : Schema.Types.ObjectId,
+        ref: "user"
     }
 }, {
     versionKey: false,

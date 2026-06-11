@@ -1,4 +1,5 @@
 import { Router } from "express";
+import authenticationUser from "../middlewares/authentication.middlewares.js";
 
 const router = Router();
 
@@ -7,10 +8,8 @@ import { createCategory, deleteCategory, getCategory, getCategoryById, updateCat
 
 // Define rutas de categorias
 router.get('/', getCategory);
-router.post('/', createCategory);
-router.get('/:id', getCategoryById);
-router.delete('/:id', deleteCategory);
-router.patch('/:id', updateCategory);
-
-
+router.post('/', authenticationUser,  createCategory);
+router.get('/:id',authenticationUser, getCategoryById);
+router.delete('/:id', authenticationUser, deleteCategory);
+router.patch('/:id', authenticationUser, updateCategory);
 export default router;
