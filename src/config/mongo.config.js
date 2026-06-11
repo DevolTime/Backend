@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-
+ const DB_mongo =process.env.DB_URI ||'mongodb://localhost:27017/crunch'
 async function crunchConnect() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/crunch');
+        await mongoose.connect(DB_mongo);
         console.log('conneted to MongoDB')
     } catch (error) {
         console.log(error);

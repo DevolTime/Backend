@@ -36,6 +36,13 @@ const userShema = new Schema({
     createBy: {
         type : Schema.Types.ObjectId,
         ref: "user"
+    },
+    role:{
+        type: String,
+        required : true,
+        enum:['administrador', 'editor', 'author','subcriber'],
+        default :'subcriber'
+
     }
 
 }, {
