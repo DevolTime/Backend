@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
- const DB_mongo =process.env.DB_URI ||'mongodb://localhost:27017/crunch'
+ const DB_mongo =process.env.DB_URI
 async function crunchConnect() {
     try {
         await mongoose.connect(DB_mongo);

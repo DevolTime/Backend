@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { AllOWEB_ROLES, ROLES } from "../config/global.config.js";
 
 // 1era parte para definir el esquema 
 
@@ -40,8 +41,8 @@ const userShema = new Schema({
     role:{
         type: String,
         required : true,
-        enum:['administrador', 'editor', 'author','subcriber'],
-        default :'subcriber'
+        enum:AllOWEB_ROLES,
+        default :ROLES.SUBSCRIBER
 
     }
 

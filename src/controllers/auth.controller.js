@@ -34,7 +34,8 @@ const loginUser = async (req, res) => {
         name : userFound.name,
         email: userFound.email,
         status: userFound.status,
-        avatar: userFound.avatar
+        avatar: userFound.avatar,
+        role: userFound.role
     }
 
 const token = generateToken(payload)
