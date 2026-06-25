@@ -19,7 +19,7 @@ const dbUpdateCategory = async (id, inputData) => {
 }
 
 const dbGetCategoryById = async (id) => {
-    return await CategoryModel.findOne(id);
+    return await CategoryModel.findById(id);
 }
 
 export {

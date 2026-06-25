@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 const app = express();
 
 import crunchConnect from './config/mongo.config.js';
@@ -11,9 +12,12 @@ import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
 
-//middlewares
 
+//middlewares
 app.use(express.json()) //permite la interpretacion de los datos en formato json 
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 // base de datos
 crunchConnect();
