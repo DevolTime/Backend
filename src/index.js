@@ -11,6 +11,7 @@ import CategoryRoutes from "./routes/category.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
+import { roleRoutes } from "./routes/roles.routes.js";
 
 
 //middlewares
@@ -37,7 +38,7 @@ app.use('/api/cart', CartRoutes)
 app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
-
+app.use('/api/roles', roleRoutes)
 app.use("/products", productsRoutes)
 
 
