@@ -11,7 +11,7 @@ import CategoryRoutes from "./routes/category.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
-import { roleRoutes } from "./routes/roles.routes.js";
+import roleRoutes from './routes/roles.routes.js';
 
 
 //middlewares
@@ -27,7 +27,7 @@ crunchConnect();
 //Endpoints 
 app.get('/health', (req, res) => {
     res.json({
-        msg: 'Sition funca'
+        msg: 'Sition '
     })
 })
 

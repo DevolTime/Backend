@@ -29,7 +29,7 @@ export const PRODUCT_STATUS = {
 export const ALLOWED_PRODUCT_STATUS = Object.values( PRODUCT_STATUS );
 export const PRODUCT_STATUS_LABEL = {
  [PRODUCT_STATUS.AVAIABLE]  : 'disponible',
- [PRODUCT_STATUSR.NOT_AVAIABLE] : 'no disponible',
+ [PRODUCT_STATUS.NOT_AVAIABLE] : 'no disponible',
  [PRODUCT_STATUS.REFURBISHED] : 'refactorizado',
  [PRODUCT_STATUS.PENDING] : 'pendiente',
  [PRODUCT_STATUS.SEND] : 'enviado'

@@ -1,5 +1,5 @@
 import { model, Schema} from "mongoose";
-import { ALLOWED_PRODUCT_STATUS, PRODUCT_STATUS } from "../config/global.config";
+import { ALLOWED_PRODUCT_STATUS, PRODUCT_STATUS } from "../config/global.config.js";
 
 // 1ira parte: definir el esquema 
 const ProductSchema = new Schema ({
