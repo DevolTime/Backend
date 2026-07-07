@@ -1,4 +1,5 @@
 import { model, Schema} from "mongoose";
+import { ALLOWED_PRODUCT_STATUS, PRODUCT_STATUS } from "../config/global.config";
 
 // 1ira parte: definir el esquema 
 const ProductSchema = new Schema ({
@@ -17,8 +18,8 @@ const ProductSchema = new Schema ({
   
     status : {
         type: String,
-        enum: ["disponible", "no disponible", "refactorizado", "pendiente", "enviado"],
-        default : "disponible"
+        enum: ALLOWED_PRODUCT_STATUS,
+        default : PRODUCT_STATUS.AVAIABLE
 
     }, 
     createBy: {
