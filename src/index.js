@@ -39,7 +39,7 @@ app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
 app.use('/api/roles', roleRoutes)
-app.use("/products", productsRoutes)
+app.use("/api/products", productsRoutes)
 
 
 const PORT = process.env.PORT || 3001

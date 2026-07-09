@@ -6,7 +6,7 @@ const ProductSchema = new Schema ({
     name: {
         type: String,
         required : true,
-        minLength:  12
+        minLength:  4
     } ,
     description:  String,
     price : {
@@ -25,7 +25,14 @@ const ProductSchema = new Schema ({
     createBy: {
             type : Schema.Types.ObjectId,
             ref: "user"
-        }
+        },
+
+        category : {
+           type : Schema.Types.ObjectId,
+           ref : 'Category'
+       },
+ 
+
 
     
 },{
