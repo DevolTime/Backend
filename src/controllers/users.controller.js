@@ -1,5 +1,5 @@
 
-import { encrypedPassword } from "../helpers/bcrypt.helper.js"
+import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
@@ -63,17 +63,16 @@ const updateUser = async (req, res) => {
 const newUser = async (req, res) => {
     try {
         const inputData = req.body
-        inputData.password = encrypedPassword(inputData.password)
-        const data = await dbnewUser(inputData)
-      
-            res.status(201).json({
-            data: data
-        });
 
+        inputData.password = encryptedPassword(inputData.password);
+        const data = await dbnewUser(inputData)
+
+        res.status(201).json({
+            msg: 'obtener nuevo usuario ',
+            data: data
+        })
 
     } catch (error) {
-        console.error(error);
-
         // A. Capturar error lanzado: Propiedad password omitida
         if (error.message.includes('Se olvidó pasar la propiedad password')) {
             return res.status(400).json({

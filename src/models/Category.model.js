@@ -10,7 +10,13 @@ const CategorySchema = new Schema({
         trim: true,
         unique: true
     },
-    image: {
+    description: String,
+    stock: {
+        type: Number,
+        default: 1,
+        min: 1
+    },
+    urlImage: {
         type: String,
         default: null
     },
@@ -18,9 +24,10 @@ const CategorySchema = new Schema({
         type: Boolean,
         default: true,
     },
-    createBy: {
-        type : Schema.Types.ObjectId,
-        ref: "user"
+
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 }, {
     versionKey: false,

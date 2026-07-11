@@ -14,6 +14,7 @@ import authRoutes from './routes/auth.routes.js';
 import roleRoutes from "./routes/roles.routes.js";
 
 
+
 //middlewares
 app.use(express.json()) //permite la interpretacion de los datos en formato json 
 app.use(cors({
@@ -40,6 +41,7 @@ app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
 app.use('/api/roles', roleRoutes)
 app.use("/products", productsRoutes)
+app.use('/auth', AuthRoutes)
 
 
 const PORT = process.env.PORT || 3001
