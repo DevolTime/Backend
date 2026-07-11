@@ -11,7 +11,7 @@ import CategoryRoutes from "./routes/category.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
-import { roleRoutes } from "./routes/roles.routes.js";
+import roleRoutes from "./routes/roles.routes.js";
 
 
 //middlewares
@@ -33,7 +33,7 @@ app.get('/health', (req, res) => {
 
 // Endpoints agrupados por entidad
 app.use('/api/users', userRoutes)
-app.use('/api/Category', CategoryRoutes)
+app.use('/api/category', CategoryRoutes)
 app.use('/api/cart', CartRoutes)
 app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)

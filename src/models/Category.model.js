@@ -10,7 +10,6 @@ const CategorySchema = new Schema({
         trim: true,
         unique: true
     },
-    description: String,
     image: {
         type: String,
         default: null

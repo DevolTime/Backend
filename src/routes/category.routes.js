@@ -10,8 +10,22 @@ import { createCategory, deleteCategory, getCategory, getCategoryById, updateCat
 
 // Define rutas de categorias
 router.get('/', getCategory);
-router.post('/', [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], createCategory);
-router.get('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])], getCategoryById);
-router.delete('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], deleteCategory);
+
+
+router.post('/', 
+    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], 
+    createCategory);
+
+
+router.get('/:id', 
+    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])], 
+getCategoryById);
+
+
+router.delete('/:id', 
+    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], 
+    deleteCategory);
+
+
 router.patch('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], updateCategory);
 export default router;
