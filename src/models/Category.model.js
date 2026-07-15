@@ -6,17 +6,11 @@ const CategorySchema = new Schema({
     name: {
         type: String,
         required: [true, 'El nombre de la categoria es obligatorio.'],
-        minLength: [5, 'El nombre debe contener al menos 3 caracteres.'],
+        minLength: [3, 'El nombre debe contener al menos 3 caracteres.'],
         trim: true,
         unique: true
     },
-    description: String,
-    stock: {
-        type: Number,
-        default: 1,
-        min: 1
-    },
-    image: {
+    urlImage: {
         type: String,
         default: null
     },

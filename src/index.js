@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 const app = express();
 
 import crunchConnect from './config/mongo.config.js';
@@ -11,9 +12,15 @@ import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
 
-//middlewares
+import roleRoutes from "./routes/roles.routes.js";
 
+
+
+//middlewares
 app.use(express.json()) //permite la interpretacion de los datos en formato json 
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 // base de datos
 crunchConnect();
@@ -22,19 +29,21 @@ crunchConnect();
 //Endpoints 
 app.get('/health', (req, res) => {
     res.json({
-        msg: 'Sition funca'
+        msg: 'Sition '
     })
 })
 
 // Endpoints agrupados por entidad
 app.use('/api/users', userRoutes)
-app.use('/api/Category', CategoryRoutes)
+app.use('/api/category', CategoryRoutes)
 app.use('/api/cart', CartRoutes)
 app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
-
+app.use('/api/roles', roleRoutes)
 app.use("/products", productsRoutes)
+app.use("/api/products", productsRoutes)
+
 
 
 const PORT = process.env.PORT || 3001

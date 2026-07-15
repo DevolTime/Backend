@@ -4,7 +4,6 @@ import { AllOWEB_ROLES, ROLES } from "../config/global.config.js";
 // 1era parte para definir el esquema 
 
 const userShema = new Schema({
-
     name: {
         type: String,
         required: true
@@ -17,13 +16,13 @@ const userShema = new Schema({
     password: {
         type: String,
         trim: true,
+        required: true
     },
     email: {
         type: String,
         unique: true,
-        lowercase: true,
-
-
+        required: true,
+        lowercase: true
     },
     status: {
         type: String,

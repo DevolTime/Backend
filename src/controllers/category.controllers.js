@@ -124,25 +124,27 @@ const createCategory = async (req, res) => {
         // Registra usando modelo y guarda la respeusta en la contante data.
         const data = await dbCreateCategory(inputData);
 
-        // Respondemos al clente enviando los datos registrados. El codigo de estado cuando se crea un recurso nuevo con exito.
-        res.status(201).json({
+        // Respondemos al cliente enviando los datos registrados. El codigo de estado cuando se crea un recuerdo nuevo con exito.
+        return res.status(201).json({
             data: data
         });
     } catch (error) {
-        console.error(error)  // para la consola (Desarrollador)
+        console.error(error); // para la consola (desarrollador)
 
-        // Validacion si la propiedad no es unico
+        // Validacion si la propiedad es duplicada (11000 es el código de error de MongoDB)
         if (error.code === 11000) {
-            res.json({
-                msg: 'Error de validacion por duplicidad en propiedades unicas'
-            })
+            return res.status(400).json({ // Agregamos un estado 400 (Bad Request)
+                msg: 'Error: Esta categoría ya existe.'
+            });
         }
 
-        //  Respondemos al cliente enviando un mensaje humano. El codigo de este estado cuando el server falla.
-        res.status(500).json({
-            msg: 'No se pudo registrar la categoria'
+        // Si es otro tipo de error, enviamos el 500
+        return res.status(500).json({
+            msg: 'No se pudo registrar la categoria',
+            error: error.message // Opcional: útil para saber qué falló
         });
     };
 };
+
 
 export { getCategory, deleteCategory, updateCategory, createCategory, getCategoryById }

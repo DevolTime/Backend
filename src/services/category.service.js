@@ -11,7 +11,7 @@ const dbGetCategory = async () => {
 }
 
 const dbDeleteCategory = async (id) => {
-    return await CategoryModel.findOneAndDelete(id)
+    return await CategoryModel.findByIdAndDelete(id)
 }
 
 const dbUpdateCategory = async (id, inputData) => {
