@@ -29,19 +29,19 @@ const userShema = new Schema({
         enum: [`disponible`, `no disponible`, `pendiente`],
         default: `disponible`
     },
-    avatar :{
+    avatar: {
         type: String,
-        default:''
+        default: ''
     },
     createBy: {
-        type : Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "user"
     },
-    role:{
+    role: {
         type: String,
-        required : true,
-        enum:AllOWEB_ROLES,
-        default :ROLES.SUBSCRIBER
+        required: true,
+        enum: AllOWEB_ROLES,
+        default: ROLES.SUBSCRIBER
 
     }
 
