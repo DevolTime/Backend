@@ -11,12 +11,9 @@ import CategoryRoutes from "./routes/category.routes.js";
 import CartRoutes from "./routes/cart.routes.js";
 import storeRoutes from './routes/stores.routes.js'
 import authRoutes from './routes/auth.routes.js';
-<<<<<<< HEAD
+
 import roleRoutes from "./routes/roles.routes.js";
 
-=======
-import roleRoutes from './routes/roles.routes.js';
->>>>>>> refs/remotes/origin/main
 
 
 //middlewares
@@ -44,12 +41,9 @@ app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
 app.use('/api/roles', roleRoutes)
-<<<<<<< HEAD
 app.use("/products", productsRoutes)
-app.use('/auth', AuthRoutes)
-=======
 app.use("/api/products", productsRoutes)
->>>>>>> refs/remotes/origin/main
+
 
 
 const PORT = process.env.PORT || 3001

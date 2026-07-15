@@ -118,20 +118,18 @@ const updateCategory = async (req, res) => {
 
 const createCategory = async (req, res) => {
     try {
+        // Obtengo los datos enviados en la peticion.
         const inputData = req.body;
-        const payload = req.payload;
-        const id = payload._id;
-
-        inputData.createdBy = id; // asigna el id del usuario logeado 
 
         // Registra usando modelo y guarda la respeusta en la contante data.
         const data = await dbCreateCategory(inputData);
 
+        // Respondemos al cliente enviando los datos registrados. El codigo de estado cuando se crea un recuerdo nuevo con exito.
         return res.status(201).json({
             data: data
         });
     } catch (error) {
-        console.error(error);
+        console.error(error); // para la consola (desarrollador)
 
         // Validacion si la propiedad es duplicada (11000 es el código de error de MongoDB)
         if (error.code === 11000) {
