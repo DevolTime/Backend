@@ -25,7 +25,7 @@ const CategorySchema = new Schema({
         default: true,
     },
     createBy: {
-        type : Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "user"
     }
 }, {

@@ -1,4 +1,4 @@
-import {Router } from "express";
+import { Router } from "express";
 import { newUser } from "../controllers/users.controller.js";
 import { loginUser, reNewToken } from "../controllers/Auth.controller.js";
 import authenticationUser from "../middlewares/authentication.middlewares.js";
@@ -7,16 +7,16 @@ import { autorizationUser } from "../middlewares/authorization.middlewares.js";
 import { ROLES } from "../config/global.config.js";
 
 const router = Router();
- //define las rutas que manejan el flujo de la autentificacion 
+//define las rutas que manejan el flujo de la autentificacion 
 
 
 // login 
-router.post('/login', loginUser )
+router.post('/login', loginUser)
 // registrer
-router.post('/register',removeRole, newUser )
+router.post('/register', newUser)
 
 //renew token 
-router.get('/renew-token', [authenticationUser,autorizationUser([ROLES.ADMIN])], reNewToken )
+router.get('/renew-token', [authenticationUser, autorizationUser([ROLES.ADMIN])], reNewToken)
 
 //remember paswrod 
 // remeber user

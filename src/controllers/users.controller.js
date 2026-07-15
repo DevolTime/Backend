@@ -1,4 +1,5 @@
 
+import { ROLES } from "../config/global.config.js"
 import { encrypedPassword } from "../helpers/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
@@ -65,8 +66,8 @@ const newUser = async (req, res) => {
         const inputData = req.body
         inputData.password = encrypedPassword(inputData.password)
         const data = await dbnewUser(inputData)
-      
-            res.status(201).json({
+
+        res.status(201).json({
             data: data
         });
 

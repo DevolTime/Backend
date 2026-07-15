@@ -8,12 +8,12 @@ import authenticationUser from "../middlewares/authentication.middlewares.js";
 import { autorizationUser } from "../middlewares/authorization.middlewares.js";
 import { ROLES } from "../config/global.config.js";
 // Definicion de las rutas para los usuarios
-router.get('/',[authenticationUser,autorizationUser([ROLES.ADMIN])], getUsers)
+router.get('/', [authenticationUser, autorizationUser([ROLES.ADMIN])], getUsers)
 
-router.delete('/:id',[authenticationUser,autorizationUser([ROLES.ADMIN])],deleteUser)
+router.delete('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], deleteUser)
 
-router.patch('/:id',[authenticationUser,autorizationUser([ROLES.ADMIN])], updateUser)
+router.patch('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], updateUser)
 
-router.post('/',[authenticationUser,autorizationUser([ROLES.ADMIN])], newUser)
+router.post('/', [authenticationUser, autorizationUser([ROLES.ADMIN])], newUser)
 
 export default router;
