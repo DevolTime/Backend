@@ -1,10 +1,6 @@
 
-<<<<<<< HEAD
 import { ROLES } from "../config/global.config.js"
-import { encrypedPassword } from "../helpers/bcrypt.helper.js"
-=======
 import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
->>>>>>> 3a287bcf0fcd20ea6373622044b907d2ed9b8df3
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
