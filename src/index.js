@@ -14,8 +14,6 @@ import authRoutes from './routes/auth.routes.js';
 
 import roleRoutes from "./routes/roles.routes.js";
 
-import roleRoutes from './routes/roles.routes.js';
-
 
 
 //middlewares
@@ -45,7 +43,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/roles', roleRoutes)
 
 app.use("/products", productsRoutes)
-app.use('/auth', AuthRoutes)
+app.use('/auth', authRoutes)
 
 app.use("/api/products", productsRoutes)
 

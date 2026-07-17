@@ -10,18 +10,16 @@ const ProductSchema = new Schema ({
     } ,
     description:  String,
 
-    price : {
+    price: {
         type: Number,
         default : 0,
         min : 0
 
     },
-  
     status : {
         type: String,
         enum: ALLOWED_PRODUCT_STATUS,
         default : PRODUCT_STATUS.AVAIABLE
-
     }, 
     createBy: {
             type : Schema.Types.ObjectId,

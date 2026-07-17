@@ -6,15 +6,17 @@ const pedidosSchema = new Schema({
         required: true,
 
     },
-    tienda_id: {
+     direccion_entrega: {
         type: String,
-        required: true
-
+        required: true,
+         maxLength: 50,
     },
-    domiciliario_id: {
+
+    productos: {
         type: String,
-        default: null
-    },precio_total: 
+        required: true,
+    },
+     precio_total: 
     {
         type: Number,   
         required: true,
@@ -29,12 +31,23 @@ const pedidosSchema = new Schema({
         default: "Pendiente"
 
     },
-    direccion_entrega: {
+
+    identificacion_pedido: {
+        type: Number,
+        required: true
+    },
+
+
+    tienda_id: {
         type: String,
-        required: true,
-        // maxLength: 200,
+        required: true
 
     },
+    domiciliario_id: {
+        type: String,
+        default: null
+    },
+    
     createBy: {
         type : Schema.Types.ObjectId,
         ref: "user"

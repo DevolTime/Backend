@@ -15,6 +15,6 @@ router.delete('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], del
 router.patch('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], updateUser)
 
 router.post('/', [authenticationUser, autorizationUser([ROLES.ADMIN])], newUser)
-eature / authentication
+
 
 export default router;
