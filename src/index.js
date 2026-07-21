@@ -41,10 +41,14 @@ app.use('/api/stores', storeRoutes)
 app.use('/api/pedidos', pedidos)
 app.use('/api/auth', authRoutes)
 app.use('/api/roles', roleRoutes)
+<<<<<<< HEAD
 
 app.use("/products", productsRoutes)
 app.use('/auth', authRoutes)
 
+=======
+app.use("/products", productsRoutes)
+>>>>>>> 2644a8c9102dc05fcd35437a520e253e4f61b8ca
 app.use("/api/products", productsRoutes)
 
 

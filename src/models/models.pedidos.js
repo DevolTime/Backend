@@ -14,11 +14,16 @@ const pedidosSchema = new Schema({
 
     productos: {
         type: String,
+
         required: true,
     },
      precio_total: 
+
+        default: null
+    },
+
     {
-        type: Number,   
+        type: Number,
         required: true,
         min: 0
     },
@@ -49,7 +54,7 @@ const pedidosSchema = new Schema({
     },
     
     createBy: {
-        type : Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "user"
     }
 }, {
@@ -58,5 +63,5 @@ const pedidosSchema = new Schema({
 });
 
 
-const pedidosModel = model ("Pedidos", pedidosSchema);
+const pedidosModel = model("Pedidos", pedidosSchema);
 export default pedidosModel;
