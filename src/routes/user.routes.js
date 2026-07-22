@@ -15,9 +15,4 @@ router.delete('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], del
 router.patch('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN])], updateUser)
 
 router.post('/', [authenticationUser, autorizationUser([ROLES.ADMIN])], newUser)
-<<<<<<< HEAD
-
-=======
->>>>>>> 2644a8c9102dc05fcd35437a520e253e4f61b8ca
-
 export default router;

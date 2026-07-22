@@ -5,8 +5,6 @@ import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } fr
 const getproducts = async (req, res) => {
     try {
         const data = await dbGetproducts();
-        
-
         res.json({
             msg: "obtener todos los productos",
             data: data
@@ -26,7 +24,7 @@ const deleteproductos = async (req, res) => {
         const id = req.params.id;
         const data = await dbDeleteproducts(id);
         //validacion 
-        if (data){
+        if (!data){
             return res.json(
                 {
                     msg :"No se puede eliminar un producto que no se encuentra registrado"
@@ -64,18 +62,13 @@ const postproducts = async (req, res) => {
         res.json({
             data: data
         });
-
-
         //respondemos al cliente enviado un mensaje humano 
     } catch (error) {
         console.error(error)
         res.status(500).json({
             msg: "hola chao"
         })
-
     }
-
-
 }
 
 const getproductsById = async (req, res) => {

@@ -6,10 +6,10 @@ const pedidosSchema = new Schema({
         required: true,
 
     },
-     direccion_entrega: {
+    direccion_entrega: {
         type: String,
         required: true,
-         maxLength: 50,
+        maxLength: 50,
     },
 
     productos: {
@@ -17,49 +17,48 @@ const pedidosSchema = new Schema({
 
         required: true,
     },
-     precio_total: 
-
-        default: null
-    },
-
-    {
-        type: Number,
+    precio_total: {
+ type: Number,
         required: true,
-        min: 0
-    },
+        min: 0,
+    default :  null,
 
-    status: {
-        type: String,
-        enum: ["Pendiente",
-            "Confirmado",
-            "En preparación", "Listo para recoger", "En camino", "Entregado", "Pedido retrasado", "Pedido cancelado"],
-        default: "Pendiente"
+},
 
-    },
+       
+    
+    status : {
+    type: String,
+    enum: ["Pendiente",
+        "Confirmado",
+        "En preparación", "Listo para recoger", "En camino", "Entregado", "Pedido retrasado", "Pedido cancelado"],
+    default: "Pendiente"
+
+},
 
     identificacion_pedido: {
-        type: Number,
-        required: true
-    },
+    type: Number,
+    required: true
+},
 
 
     tienda_id: {
-        type: String,
-        required: true
+    type: String,
+    required: true
 
-    },
+},
     domiciliario_id: {
-        type: String,
-        default: null
-    },
-    
+    type: String,
+    default: null
+},
+
     createBy: {
-        type: Schema.Types.ObjectId,
-        ref: "user"
-    }
+    type: Schema.Types.ObjectId,
+    ref: "user"
+}
 }, {
     versionKey: false,
-    timestamps: true
+        timestamps: true
 });
 
 

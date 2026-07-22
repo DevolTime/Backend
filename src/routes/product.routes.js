@@ -9,11 +9,18 @@ const router = Router ();
 
 // define rutas para productos
 router.get ("/" , getproducts) ;
-router.get("/:id",[authenticationUser,autorizationUser([ROLES.ADMIN])], getproductsById);
-router.delete ("/:id",[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])], deleteproductos);
+router.get("/:id",
+    //[authenticationUser,autorizationUser([ROLES.ADMIN])], 
+    getproductsById);
+
+router.delete ("/:id",
+    //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])], 
+    deleteproductos);
 router.post ("/", 
     //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],
     postproducts);
-router.patch("/:id",[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],  patchproducts );
+router.patch("/:id",
+    //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],  
+    patchproducts );
 
 export default router;

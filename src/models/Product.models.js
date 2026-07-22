@@ -16,21 +16,11 @@ const ProductSchema = new Schema({
         min: 0
 
     },
-<<<<<<< HEAD
     status : {
         type: String,
         enum: ALLOWED_PRODUCT_STATUS,
         default : PRODUCT_STATUS.AVAIABLE
     }, 
-=======
-
-    status: {
-        type: String,
-        enum: ALLOWED_PRODUCT_STATUS,
-        default: PRODUCT_STATUS.AVAIABLE
-
-    },
->>>>>>> 2644a8c9102dc05fcd35437a520e253e4f61b8ca
     createBy: {
         type: Schema.Types.ObjectId,
         ref: "user"
