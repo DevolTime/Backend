@@ -3,10 +3,10 @@
 
 //retorna un objeto con todos los roles permitidos o podemos obtener solo uno de ellos 
 export const ROLES = {
-    ADMIN :'administrador',
-    EDITOR : 'editor',
-    AUTHOR : 'author',
-    SUBSCRIBER :'subcriber'
+    ADMIN: 'administrador',
+    EDITOR: 'editor',
+    AUTHOR: 'author',
+    SUBSCRIBER: 'subcriber'
 }
 
 //retorna una listado de los roles permitidos 
@@ -26,11 +26,11 @@ export const PRODUCT_STATUS = {
 
 
 // Retorna el listado de los roles permitidos
-export const ALLOWED_PRODUCT_STATUS = Object.values( PRODUCT_STATUS );
+export const ALLOWED_PRODUCT_STATUS = Object.values(PRODUCT_STATUS);
 export const PRODUCT_STATUS_LABEL = {
- [PRODUCT_STATUS.AVAIABLE]  : 'disponible',
- [PRODUCT_STATUS.NOT_AVAIABLE] : 'no disponible',
- [PRODUCT_STATUS.REFURBISHED] : 'refactorizado',
- [PRODUCT_STATUS.PENDING] : 'pendiente',
- [PRODUCT_STATUS.SEND] : 'enviado'
+    [PRODUCT_STATUS.AVAIABLE]: 'disponible',
+    [PRODUCT_STATUS.NOT_AVAIABLE]: 'no disponible',
+    [PRODUCT_STATUS.REFURBISHED]: 'refactorizado',
+    [PRODUCT_STATUS.PENDING]: 'pendiente',
+    [PRODUCT_STATUS.SEND]: 'enviado'
 }

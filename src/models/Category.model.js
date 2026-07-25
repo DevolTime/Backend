@@ -27,7 +27,6 @@ const CategorySchema = new Schema({
     timestamps: true,
 });
 
-
 // Segunda parte: Definir el model
 
 const CategoryModel = model(

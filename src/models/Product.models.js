@@ -21,7 +21,6 @@ const ProductSchema = new Schema({
         default: PRODUCT_STATUS.AVAIABLE
     },
     createBy: {
-
         type: Schema.Types.ObjectId,
         ref: "user"
     },
@@ -31,6 +30,10 @@ const ProductSchema = new Schema({
         ref: 'Category'
     },
 
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
+    },
 }, {
     versionKey: false,
     timestamps: true

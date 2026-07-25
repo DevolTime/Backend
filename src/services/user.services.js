@@ -8,7 +8,7 @@ const dbgetUsers = async () => {
 }
 
 const dbdeleteUser = async (id) => {
-    return await usermodel.findOneAndDelete(id);
+    // return await usermodel.findOneAndDelete(id);
     return await usermodel.findByIdAndDelete(id);
 
 }
