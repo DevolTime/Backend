@@ -18,7 +18,6 @@ const getUsers = async (req, res) => {
             msg: 'no se Obtener infromacion de los usuarios'
         });
     }
-
 }
 const deleteUser = async (req, res) => {
     try {

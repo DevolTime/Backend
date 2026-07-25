@@ -89,7 +89,7 @@ const getCategoryById = async (req, res) => {
 };
 
 const updateCategory = async (req, res) => {
-    try {
+    try {55555
         const id = req.params.id;
         const inputData = req.body;
 
