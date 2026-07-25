@@ -6,14 +6,12 @@ const getCategory = async (req, res) => {
 
     try {
         const data = await dbGetCategory();
-
         res.json({
             msg: 'lista categorias',
             data: data
         })
     } catch (error) {
         console.error(error)
-
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
         })
@@ -24,14 +22,12 @@ const getCategory = async (req, res) => {
 const deleteCategory = async (req, res) => {
     try {
         const id = req.params.id;
-
         // validacion defensiva: condicionamos antes que ocurra el error (no pasa)
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 msg: 'No se pudo eliminar la categoria ya que el id proporcionado es invalido'
             })
         }
-
         const data = await dbDeleteCategory(id);
         //  Validacion
         if (!data) {
@@ -39,15 +35,12 @@ const deleteCategory = async (req, res) => {
                 msg: 'No se puede eliminar una categoria que no se encuentra registrado'
             })
         }
-
-
         res.json({
             msg: 'Eliminar una categorias',
             data: data
         });
     } catch (error) {
         console.error(error)
-
         res.status(500).json({
             msg: 'No se pudo eliminar la Categoria'
         })
@@ -55,33 +48,27 @@ const deleteCategory = async (req, res) => {
 };
 
 const getCategoryById = async (req, res) => {
-
     try {
         const id = req.params.id;
-
         // validacion defensiva: condicionamos antes que ocurra el error (no pasa)
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 msg: 'No se pudo buscar la categorua ya que el id proporcionado es invalido'
             })
         }
-
         const data = await dbGetCategoryById(id);
-
         //  Validacion
         if (!data) {
             return res.status(400).json({
                 msg: 'No se puede buscar una categoria que no se encuentra registrado'
             })
         }
-
         res.json({
             msg: 'Obtiene una Categoria por id',
             data: data
         })
     } catch (error) {
         console.error(error);
-
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
         })
@@ -89,10 +76,12 @@ const getCategoryById = async (req, res) => {
 };
 
 const updateCategory = async (req, res) => {
-    try {55555
+    try {
         const id = req.params.id;
         const inputData = req.body;
-
+        if (req.file) {
+            inputData.urlImage = `${req.protocol}://${req.get('host')}/uploads/categories/${req.file.filename}`;
+        }
         const data = await dbUpdateCategory(id, inputData)
 
         //const data = await CategoryModel.findOneAndUpdate({ _id: id }, inputData)
@@ -102,14 +91,12 @@ const updateCategory = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-
         // Validacion exepcion: Manejar cuando ocurre el error
         if (error.name === 'CastError') {
             return res.status(400).json({
                 msg: 'No se pudo actualizar la categoria ya que el ID proporcioando es invalido'
             })
         }
-
         res.status(500).json({
             msg: 'No se pudo actualizar la categoria por su id'
         })
@@ -118,32 +105,50 @@ const updateCategory = async (req, res) => {
 
 const createCategory = async (req, res) => {
     try {
-        // Obtengo los datos enviados en la peticion.
-        const inputData = req.body;
+        // Obtenemos los datos recibidos
+        const inputData = { ...req.body };
 
-        // Registra usando modelo y guarda la respeusta en la contante data.
+        // Parseamos 'status' si viene como string desde FormData ('true' -> true)
+        if (typeof inputData.status === 'string') {
+            inputData.status = inputData.status === 'true';
+        }
+
+        // Si Multer subió un archivo, le asignamos la URL pública
+        if (req.file) {
+            // Nota: Ajusta 'uploads' o 'uploads/categories' según la carpeta real donde guarda Multer
+            inputData.urlImage = `${req.protocol}://${req.get('host')}/uploads/categories/${req.file.filename}`;
+        }
+
         const data = await dbCreateCategory(inputData);
 
-        // Respondemos al cliente enviando los datos registrados. El codigo de estado cuando se crea un recuerdo nuevo con exito.
         return res.status(201).json({
+            msg: 'Categoría creada con éxito',
             data: data
         });
-    } catch (error) {
-        console.error(error); // para la consola (desarrollador)
 
-        // Validacion si la propiedad es duplicada (11000 es el código de error de MongoDB)
+    } catch (error) {
+        console.error('Error al crear categoría:', error);
+
+        // Error por campo duplicado en MongoDB (código 11000)
         if (error.code === 11000) {
-            return res.status(400).json({ // Agregamos un estado 400 (Bad Request)
+            return res.status(400).json({
                 msg: 'Error: Esta categoría ya existe.'
             });
         }
 
-        // Si es otro tipo de error, enviamos el 500
+        // Error de validación de Mongoose
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                msg: 'Error de validación en los datos enviados',
+                details: error.message
+            });
+        }
+
         return res.status(500).json({
             msg: 'No se pudo registrar la categoria',
-            error: error.message // Opcional: útil para saber qué falló
+            error: error.message
         });
-    };
+    }
 };
 
 

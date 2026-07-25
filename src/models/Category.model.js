@@ -18,14 +18,17 @@ const CategorySchema = new Schema({
         type: Boolean,
         default: true,
     },
-    createBy: {
+
+    createdBy: {
         type: Schema.Types.ObjectId,
-        ref: "user"
+        ref: 'user',
+        required: false
     }
 }, {
     versionKey: false,
     timestamps: true,
 });
+
 
 // Segunda parte: Definir el model
 

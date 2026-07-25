@@ -24,12 +24,6 @@ const ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user"
     },
-
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category'
-    },
-
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
