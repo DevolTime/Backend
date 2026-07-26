@@ -1,39 +1,45 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs'; // Módulo nativo para interactuar con el sistema de archivos (borrar imágenes)
+import path from 'path'; // Módulo nativo para manipular rutas de archivos de forma multiplataforma
 import mongoose from "mongoose";
-import CategoryModel from "../models/Category.model.js";
-import { dbGetCategory, dbCreateCategory, dbDeleteCategory, dbUpdateCategory, dbGetCategoryById } from "../services/category.service.js"
 
+import {
+    dbGetCategory,
+    dbCreateCategory,
+    dbDeleteCategory,
+    dbUpdateCategory,
+    dbGetCategoryById
+} from "../services/category.service.js";
 
+// 2. CONTROLADORES CRUD
+// Obtener el listado general de categorías
 const getCategory = async (req, res) => {
-
     try {
         const data = await dbGetCategory();
         res.json({
             msg: 'lista categorias',
             data: data
-        })
+        });
     } catch (error) {
-        console.error(error)
+        console.error(error);
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
-        })
+        });
     }
-}
+};
 
-
+// Eliminar una categoría y remover su imagen física asociada del disco
 const deleteCategory = async (req, res) => {
     try {
         const id = req.params.id;
 
-        // Validacion defensiva de ObjectId
+        // Validación defensiva: verifica que el ID tenga la estructura de un ObjectId de Mongo
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 msg: 'No se pudo eliminar la categoria ya que el id proporcionado es invalido'
             });
         }
 
-        // 1. Buscamos la categoría PRIMERO para obtener la ruta de la imagen antes de eliminar de la DB
+        // 1. Obtiene la categoría de la DB para extraer la ruta de su imagen antes de borrarla
         const categoryToDelete = await dbGetCategoryById(id);
 
         if (!categoryToDelete) {
@@ -42,7 +48,7 @@ const deleteCategory = async (req, res) => {
             });
         }
 
-        // 2. Si la categoría tiene una imagen asociada, la borramos del servidor
+        // 2. Si tiene una URL de imagen asociada, elimina el archivo físico del disco
         if (categoryToDelete.urlImage) {
             const fileName = categoryToDelete.urlImage.split('/uploads/categories/')[1];
 
@@ -59,14 +65,13 @@ const deleteCategory = async (req, res) => {
             }
         }
 
-        // 3. Eliminamos el registro de la base de datos
+        // 3. Elimina el registro de la base de datos
         const data = await dbDeleteCategory(id);
 
         res.json({
             msg: 'Categoría e imagen eliminadas correctamente',
             data: data
         });
-
     } catch (error) {
         console.error('Error al eliminar categoría:', error);
         res.status(500).json({
@@ -75,56 +80,58 @@ const deleteCategory = async (req, res) => {
     }
 };
 
+// Obtener el detalle de una categoría por su ID
 const getCategoryById = async (req, res) => {
     try {
         const id = req.params.id;
-        // validacion defensiva: condicionamos antes que ocurra el error (no pasa)
+
+        // Validación defensiva del parámetro ID
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 msg: 'No se pudo buscar la categorua ya que el id proporcionado es invalido'
-            })
+            });
         }
+
         const data = await dbGetCategoryById(id);
-        //  Validacion
+
         if (!data) {
             return res.status(400).json({
                 msg: 'No se puede buscar una categoria que no se encuentra registrado'
-            })
+            });
         }
+
         res.json({
             msg: 'Obtiene una Categoria por id',
             data: data
-        })
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({
             msg: 'No se pudo encontrar la categoria'
-        })
-    };
+        });
+    }
 };
 
+// Actualizar datos/estado de una categoría y reemplazar su imagen previa en disco
 const updateCategory = async (req, res) => {
     try {
         const id = req.params.id;
         const inputData = { ...req.body };
-        // Parsear status si viene como string desde FormData ('true' -> true)
+
+        // Convierte el valor 'status' de String a Boolean si proviene de FormData
         if (typeof inputData.status === 'string') {
             inputData.status = inputData.status === 'true';
         }
-        // Si el cliente envió una NUEVA imagen
+
+        // Si se envió un nuevo archivo mediante el middleware Multer
         if (req.file) {
-            // 1. Buscamos la categoría actual en la DB para obtener la ruta de la imagen vieja
+            // 1. Consulta la imagen vieja registrada
             const oldCategory = await dbGetCategoryById(id);
-
             if (oldCategory && oldCategory.urlImage) {
-                // 2. Extraemos solo el nombre del archivo (ej: "image-1784958362157.png")
                 const oldFileName = oldCategory.urlImage.split('/uploads/categories/')[1];
-
                 if (oldFileName) {
-                    // 3. Construimos la ruta física donde está guardada en la raíz del proyecto
                     const oldFilePath = path.join(process.cwd(), 'uploads', 'categories', oldFileName);
-
-                    // 4. Eliminamos el archivo viejo del disco
+                    // 2. Elimina la imagen antigua de la carpeta del servidor
                     fs.unlink(oldFilePath, (err) => {
                         if (err) {
                             console.error('⚠️ No se pudo eliminar la imagen anterior:', err.message);
@@ -134,7 +141,7 @@ const updateCategory = async (req, res) => {
                     });
                 }
             }
-            // 5. Asignamos la nueva URL de la imagen recibida por Multer
+            // 3. Asigna la nueva URL accesible públicamente al objeto de datos
             inputData.urlImage = `${req.protocol}://${req.get('host')}/uploads/categories/${req.file.filename}`;
         }
         const data = await dbUpdateCategory(id, inputData);
@@ -142,62 +149,51 @@ const updateCategory = async (req, res) => {
             msg: 'Actualiza una categorias',
             data: data
         });
-
     } catch (error) {
         console.error(error);
-        // Validacion exepcion: Manejar cuando ocurre el error
         if (error.name === 'CastError') {
             return res.status(400).json({
                 msg: 'No se pudo actualizar la categoria ya que el ID proporcioando es invalido'
-            })
+            });
         }
         res.status(500).json({
             msg: 'No se pudo actualizar la categoria por su id'
-        })
+        });
     }
 };
 
+// Registrar una nueva categoría en el sistema
 const createCategory = async (req, res) => {
     try {
-        // Obtenemos los datos recibidos
         const inputData = { ...req.body };
-
-        // Parseamos 'status' si viene como string desde FormData ('true' -> true)
+        // Parsea 'status' proveniente de un FormData
         if (typeof inputData.status === 'string') {
             inputData.status = inputData.status === 'true';
         }
-
-        // Si Multer subió un archivo, le asignamos la URL pública
+        // Si se subió un archivo de imagen, genera la ruta estática accesible
         if (req.file) {
-            // Nota: Ajusta 'uploads' o 'uploads/categories' según la carpeta real donde guarda Multer
             inputData.urlImage = `${req.protocol}://${req.get('host')}/uploads/categories/${req.file.filename}`;
         }
-
         const data = await dbCreateCategory(inputData);
-
         return res.status(201).json({
             msg: 'Categoría creada con éxito',
             data: data
         });
-
     } catch (error) {
         console.error('Error al crear categoría:', error);
-
-        // Error por campo duplicado en MongoDB (código 11000)
+        // Control de duplicados en índices de MongoDB (ej. nombre de categoría único)
         if (error.code === 11000) {
             return res.status(400).json({
                 msg: 'Error: Esta categoría ya existe.'
             });
         }
-
-        // Error de validación de Mongoose
+        // Control de errores de validación definidos en el Schema de Mongoose
         if (error.name === 'ValidationError') {
             return res.status(400).json({
                 msg: 'Error de validación en los datos enviados',
                 details: error.message
             });
         }
-
         return res.status(500).json({
             msg: 'No se pudo registrar la categoria',
             error: error.message
@@ -205,5 +201,10 @@ const createCategory = async (req, res) => {
     }
 };
 
-
-export { getCategory, deleteCategory, updateCategory, createCategory, getCategoryById }
+export {
+    getCategory,
+    deleteCategory,
+    updateCategory,
+    createCategory,
+    getCategoryById
+};
