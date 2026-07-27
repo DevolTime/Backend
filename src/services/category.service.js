@@ -18,8 +18,9 @@ const dbDeleteCategory = async (id) => {
 
 // Actualizar los campos de una categoría existente
 const dbUpdateCategory = async (id, inputData) => {
-    return await CategoryModel.findByIdAndUpdate(id, inputData, { new: true });
+    return await CategoryModel.findByIdAndUpdate(id, inputData, { returnDocument: 'after' });
 };
+
 
 // Obtener una categoría específica por su ID único
 
@@ -28,9 +29,9 @@ const dbGetCategoryById = async (id) => {
 };
 
 export {
-    dbCreateCategory, 
-    dbGetCategory, 
-    dbDeleteCategory, 
-    dbUpdateCategory, 
+    dbCreateCategory,
+    dbGetCategory,
+    dbDeleteCategory,
+    dbUpdateCategory,
     dbGetCategoryById
 };
