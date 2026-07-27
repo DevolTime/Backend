@@ -15,6 +15,7 @@ router.post('/login', loginUser)
 // registrer
 router.post('/register', removeRole, newUser)
 
+
 //renew token 
 router.get('/renew-token', [authenticationUser, autorizationUser([ROLES.ADMIN])], reNewToken)
 

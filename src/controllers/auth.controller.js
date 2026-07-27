@@ -4,6 +4,8 @@ import { validatePassword } from "../helpers/bcrypt.helper.js"
 import { dbGetUserByEmail } from "../services/user.services.js"
 import { generateToken } from "../helpers/jwt.helper.js"
 
+
+
 const loginUser = async (req, res) => {
     try {
         const inputData = req.body // paso 1 extraer los datos que se ingresan 

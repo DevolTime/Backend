@@ -4,7 +4,7 @@
   "description": "BackEnd Ecoommerce de comida",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file .env --watch ./src/index.js"
+    "dev": "node --env-file .env --watch server.js"
   },
   "keywords": [],
   "author": "DevolTime <yefriathertua@gmail.com>",
@@ -17,8 +17,10 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.6.2"
+    "mongoose": "^9.6.2",
+    "multer": "^2.2.0"
   }
 }

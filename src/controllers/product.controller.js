@@ -5,6 +5,11 @@ import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } fr
 const getproducts = async (req, res) => {
     try {
         const data = await dbGetproducts();
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4c3c96ea6d807b3a13548101aa220a53f0834aad
         res.json({
             msg: "obtener todos los productos",
             data: data
@@ -24,18 +29,22 @@ const deleteproductos = async (req, res) => {
         const id = req.params.id;
         const data = await dbDeleteproducts(id);
         //validacion 
+<<<<<<< HEAD
         if (!data){
+=======
+        if (data) {
+>>>>>>> 4c3c96ea6d807b3a13548101aa220a53f0834aad
             return res.json(
                 {
-                    msg :"No se puede eliminar un producto que no se encuentra registrado"
+                    msg: "No se puede eliminar un producto que no se encuentra registrado"
                 }
             )
         }
-         if (! mongoose.Types.ObjectId.isValid(id)){
-    return res.status(400).json({
-    msg: "el ID proporcionado no se ha podido elimar porque es invalido"            
-    });
- }
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                msg: "el ID proporcionado no se ha podido elimar porque es invalido"
+            });
+        }
 
         res.json({
             msg: "eliminar productos",
@@ -73,28 +82,28 @@ const postproducts = async (req, res) => {
 
 const getproductsById = async (req, res) => {
     try {
- const id = req.params.id;
- //VALIDACION DEFENSIVA : CONDICIONAMOS PREVIO A QUE OCURRA EL ERROR  (NUNCA OCURRE)
- if (! mongoose.Types.ObjectId.isValid(id)){
-    return res.status(400).json({
-        msg: "el ID proporcionado es invalido"
-    });
- }
-    const data = await dbGetproductsById(id);
-    res.json({
-        msg: ("obtiene un producto por id"),
-        data: data
+        const id = req.params.id;
+        //VALIDACION DEFENSIVA : CONDICIONAMOS PREVIO A QUE OCURRA EL ERROR  (NUNCA OCURRE)
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                msg: "el ID proporcionado es invalido"
+            });
+        }
+        const data = await dbGetproductsById(id);
+        res.json({
+            msg: ("obtiene un producto por id"),
+            data: data
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json ({
-            msg:"error al"
+        res.status(500).json({
+            msg: "error al"
         });
 
     }
-   
 
-    
+
+
 }
 
 const patchproducts = async (req, res) => {
@@ -103,14 +112,14 @@ const patchproducts = async (req, res) => {
 
         const inputData = req.body; // obteniendo el objeto con el /los parametros que quiero actualizar
         const data = await ProductModel.findByIdAndUpdate(id, inputData, { new: true });
-         if (data){
-            
-            throw new  error("no se pudo actualizar el producto")
-               if (error.message.includes("no se pudo actualizar el producto")) {
-                return res.json ({
+        if (data) {
+
+            throw new error("no se pudo actualizar el producto")
+            if (error.message.includes("no se pudo actualizar el producto")) {
+                return res.json({
                     msg: error.message
                 });
-               }
+            }
         }
         res.json({
             msg: "actualizar productos",
@@ -122,7 +131,7 @@ const patchproducts = async (req, res) => {
         //validacion execption: manejar cuando ocurre el error
         if (error.name === "CastError") {
             return res.status(400).json({
-                msg : "no se pudo actulizar el producto porque el ID es invalido"
+                msg: "no se pudo actulizar el producto porque el ID es invalido"
             });
         }
         res.status(500).json({

@@ -1,4 +1,5 @@
 
+import { ROLES } from "../config/global.config.js"
 import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
@@ -17,7 +18,6 @@ const getUsers = async (req, res) => {
             msg: 'no se Obtener infromacion de los usuarios'
         });
     }
-
 }
 const deleteUser = async (req, res) => {
     try {

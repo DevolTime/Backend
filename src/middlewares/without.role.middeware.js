@@ -1,9 +1,9 @@
-const removeRole= (req, res,next)=>{
+const removeRole = (req, res, next) => {
 
-const inputData =req.body;
-delete inputData.role;
-next();
+    const inputData = req.body;
+    delete inputData.role;
+    next();
 }
-export{
+export {
     removeRole
 }

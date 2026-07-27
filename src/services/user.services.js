@@ -8,7 +8,7 @@ const dbgetUsers = async () => {
 }
 
 const dbdeleteUser = async (id) => {
-    return await usermodel.findOneAndDelete(id);
+    // return await usermodel.findOneAndDelete(id);
     return await usermodel.findByIdAndDelete(id);
 
 }
@@ -17,11 +17,9 @@ const dbupdateUser = async (id, inputData) => {
 }
 
 const dbGetUserByEmail = async (email) => {
-    if (!email) {
-        throw new Error('Se olvidó pasar la propiedad email en el login');
-    }
-    return await usermodel.findOne({ email: email.toLowerCase(), status: 'disponible' })
+    if (!email) { throw new Error('se olvido la propiedad email en el login') }
 
+    return await usermodel.findOne({ email: email.toLowerCase(), status: "disponible" })
 }
 export {
     dbgetUsers,
