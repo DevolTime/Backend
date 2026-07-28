@@ -22,10 +22,15 @@ const dbGetUserByEmail = async (email) => {
     
     return await usermodel.findOne({ email: email.toLowerCase(), status :"disponible" })
 }
+const dbGetUserById = async(id)=>{
+    return await usermodel.findById(id);
+
+}
 export {
     dbgetUsers,
     dbnewUser,
     dbdeleteUser,
     dbupdateUser,
-    dbGetUserByEmail
+    dbGetUserByEmail,
+    dbGetUserById
 }
