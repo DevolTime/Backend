@@ -20,6 +20,8 @@ const app = express(); // Instancia principal de la aplicación de Express
 app.use(cors()); // evitar bloqueos por políticas del navegador cuando Angular consulte la API
 app.use(express.json()); // leer y procesar peticiones en formato JSON (req.body)
 app.use(express.urlencoded({ extended: true })); // Permite procesar datos enviados desde formularios codificados en URL
+app.use("/products", productsRoutes)
+
 
 // 6. SERVIDOR DE ARCHIVOS ESTÁTICOS
 

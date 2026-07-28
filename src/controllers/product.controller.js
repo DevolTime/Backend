@@ -5,11 +5,6 @@ import { dbGetproducts, dbDeleteproducts, insertproduct, dbGetproductsById, } fr
 const getproducts = async (req, res) => {
     try {
         const data = await dbGetproducts();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4c3c96ea6d807b3a13548101aa220a53f0834aad
         res.json({
             msg: "obtener todos los productos",
             data: data
@@ -29,11 +24,8 @@ const deleteproductos = async (req, res) => {
         const id = req.params.id;
         const data = await dbDeleteproducts(id);
         //validacion 
-<<<<<<< HEAD
-        if (!data){
-=======
+
         if (data) {
->>>>>>> 4c3c96ea6d807b3a13548101aa220a53f0834aad
             return res.json(
                 {
                     msg: "No se puede eliminar un producto que no se encuentra registrado"

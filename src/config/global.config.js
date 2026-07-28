@@ -18,10 +18,7 @@ export const AllOWEB_ROLES = Object.values(ROLES);
 // Retorta un objeto con todos los roles, permitidos o podemos obtener solo uno de ellos
 export const PRODUCT_STATUS = {
     AVAIABLE: 'disponible',
-    NOT_AVAIABLE: 'no disponible',
-    REFURBISHED: 'refactorizado',
-    PENDING: 'pendiente',
-    SEND: 'enviado'
+    NOT_AVAIABLE: 'no disponible'
 };
 
 
@@ -29,8 +26,5 @@ export const PRODUCT_STATUS = {
 export const ALLOWED_PRODUCT_STATUS = Object.values(PRODUCT_STATUS);
 export const PRODUCT_STATUS_LABEL = {
     [PRODUCT_STATUS.AVAIABLE]: 'disponible',
-    [PRODUCT_STATUS.NOT_AVAIABLE]: 'no disponible',
-    [PRODUCT_STATUS.REFURBISHED]: 'refactorizado',
-    [PRODUCT_STATUS.PENDING]: 'pendiente',
-    [PRODUCT_STATUS.SEND]: 'enviado'
+    [PRODUCT_STATUS.NOT_AVAIABLE]: 'no disponible'
 }
