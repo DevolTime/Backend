@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { AllOWED_STATUS, STATUS } from "../config/status.config.js";
+import { AllOWEB_STATUS, STATUS } from "../config/status.config.js";
 const storeShema = new Schema({
     name: {
         type: String,
@@ -24,7 +24,7 @@ const storeShema = new Schema({
     status: {
         type: String,
                 required:true,
-                enum: AllOWED_STATUS,
+                enum: AllOWEB_STATUS,
                 default: STATUS.DISPONIBLE
     },
     createBy: {

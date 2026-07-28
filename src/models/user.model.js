@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
-import { AllOWED_ROLES, ROLES } from "../config/global.config.js";
-import { AllOWED_STATUS, STATUS } from "../config/status.config.js";
+import { AllOWEB_ROLES, ROLES } from "../config/global.config.js";
+import { AllOWEB_STATUS, STATUS } from "../config/status.config.js";
 
 // 1era parte para definir el esquema 
 
@@ -32,7 +32,7 @@ const userShema = new Schema({
     },
     status: {
         type: String,
-        enum: AllOWED_STATUS,
+        enum: AllOWEB_STATUS,
         default: STATUS.DISPONIBLE
     },
     avatar :{

@@ -62,17 +62,8 @@ const loginUser = async (req, res) => {
             error.message.includes('las credenciales no son validas')
         ) { return res.status(400).json({ msg: error.message }); }
 
-<<<<<<< HEAD
     
-if (error.message.includes('no se puedo generar el token de acceso')) {
-    return res.status(500).json({
-        msg:error.message
-    })
-    res.status(500).json({
-        msg: 'ocurrio un error en el servidor durante el login'
-    })
-}}
-=======
+
         if (error.message.includes('no se puedo generar el token de acceso')) {
             return res.status(500).json({
                 msg: error.message
@@ -82,7 +73,6 @@ if (error.message.includes('no se puedo generar el token de acceso')) {
             })
         }
     }
->>>>>>> 204527ee7c22796539ef357a8ed6748ae687d146
 
 }
 

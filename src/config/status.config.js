@@ -3,7 +3,7 @@ export const STATUS ={
     NODISPONIBLE:`no disponible`,
     PENDIENTE:`pendiente`
 } 
-export const AllOWED_STATUS = Object.values(STATUS)
+export const AllOWEB_STATUS = Object.values(STATUS)
 
 export const STATUS_LABELS={
     [STATUS.DISPONIBLE]:`Disponible`,

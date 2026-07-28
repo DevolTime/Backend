@@ -10,8 +10,6 @@ export const ROLES = {
 }
 
 //retorna una listado de los roles permitidos 
-<<<<<<< HEAD
-export const AllOWED_ROLES = Object.values(ROLES);
 //estructura 
 export const ROLE_LABELS ={
     [ROLES.ADMIN] : 'Administrador',
@@ -20,7 +18,6 @@ export const ROLE_LABELS ={
     [ROLES.SUBSCRIBER] :'Subscriptor'
 
 }
-=======
 
 export const AllOWEB_ROLES = Object.values(ROLES);
 
@@ -45,4 +42,3 @@ export const PRODUCT_STATUS_LABEL = {
     [PRODUCT_STATUS.PENDING]: 'pendiente',
     [PRODUCT_STATUS.SEND]: 'enviado'
 }
->>>>>>> 204527ee7c22796539ef357a8ed6748ae687d146
