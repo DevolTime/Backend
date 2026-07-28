@@ -1,5 +1,6 @@
 
-import { encrypedPassword } from "../helpers/bcrypt.helper.js"
+import { ROLES } from "../config/global.config.js"
+import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
 import { dbdeleteUser, dbGetUserById, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
@@ -17,7 +18,6 @@ const getUsers = async (req, res) => {
             msg: 'no se Obtener infromacion de los usuarios'
         });
     }
-
 }
 const getUserById =async( req,res)=>{
 
@@ -85,18 +85,15 @@ const updateUser = async (req, res) => {
 const newUser = async (req, res) => {
     try {
         const inputData = req.body
-        inputData.password = encrypedPassword(inputData.password)
+
+        inputData.password = encryptedPassword(inputData.password);
         const data = await dbnewUser(inputData)
       
             res.status(201).json({
-                msg: 'registra suaurio de forma publica',
             data: data
-        });
-
+        })
 
     } catch (error) {
-        console.error(error);
-
         // A. Capturar error lanzado: Propiedad password omitida
         if (error.message.includes('Se olvidó pasar la propiedad password')) {
             return res.status(400).json({

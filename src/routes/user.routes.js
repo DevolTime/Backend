@@ -26,6 +26,4 @@ router.patch('/:id',
     //[authenticationUser,autorizationUser([ROLES.ADMIN])],
      updateUser)
 
-
-
 export default router;

@@ -28,9 +28,9 @@ const storeShema = new Schema({
                 default: STATUS.DISPONIBLE
     },
     createBy: {
-            type : Schema.Types.ObjectId,
-            ref: "user"
-        }
+        type: Schema.Types.ObjectId,
+        ref: "user"
+    }
 }, {
     versionKey: false,
     timestamps: true,

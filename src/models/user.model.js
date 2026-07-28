@@ -5,7 +5,6 @@ import { AllOWED_STATUS, STATUS } from "../config/status.config.js";
 // 1era parte para definir el esquema 
 
 const userShema = new Schema({
-
     name: {
         type: String,
         required: true
@@ -28,9 +27,8 @@ const userShema = new Schema({
     email: {
         type: String,
         unique: true,
-        lowercase:true,
-    
-
+        required: true,
+        lowercase: true
     },
     status: {
         type: String,
@@ -45,10 +43,11 @@ const userShema = new Schema({
     //     type : Schema.Types.ObjectId,
     //     ref: "user"
     // },
-    role:{
+    role: {
         type: String,
-        enum:AllOWED_ROLES,
-        default :ROLES.SUBSCRIBER
+        required: true,
+        enum: AllOWEB_ROLES,
+        default: ROLES.SUBSCRIBER
 
     }
 
