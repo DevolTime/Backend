@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { AllOWEB_ROLES, ROLES } from "../config/global.config.js";
+import { AllOWEB_STATUS, STATUS } from "../config/status.config.js";
 
 // 1era parte para definir el esquema 
 
@@ -16,7 +17,12 @@ const userShema = new Schema({
     password: {
         type: String,
         trim: true,
-        required: true
+        required : true
+    },
+    confirmPassword: {
+        type: String,
+        trim: true,
+        required : true
     },
     email: {
         type: String,
@@ -26,17 +32,17 @@ const userShema = new Schema({
     },
     status: {
         type: String,
-        enum: [`disponible`, `no disponible`, `pendiente`],
-        default: `disponible`
+        enum: AllOWEB_STATUS,
+        default: STATUS.DISPONIBLE
     },
-    avatar: {
-        type: String,
-        default: ''
+    avatar :{
+     type: String,
+        default:''
     },
-    createBy: {
-        type: Schema.Types.ObjectId,
-        ref: "user"
-    },
+    // createBy: {
+    //     type : Schema.Types.ObjectId,
+    //     ref: "user"
+    // },
     role: {
         type: String,
         required: true,

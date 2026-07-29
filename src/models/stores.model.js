@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import { AllOWEB_STATUS, STATUS } from "../config/status.config.js";
 const storeShema = new Schema({
     name: {
         type: String,
@@ -22,8 +23,9 @@ const storeShema = new Schema({
     },
     status: {
         type: String,
-        enum: ['abierto', 'cerrado'],
-        default: 'abierto'
+                required:true,
+                enum: AllOWEB_STATUS,
+                default: STATUS.DISPONIBLE
     },
     createBy: {
         type: Schema.Types.ObjectId,

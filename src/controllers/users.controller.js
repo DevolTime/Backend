@@ -2,7 +2,7 @@
 import { ROLES } from "../config/global.config.js"
 import { encryptedPassword } from "../bcrypt.helper/bcrypt.helper.js"
 import usermodel from "../models/user.model.js"
-import { dbdeleteUser, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
+import { dbdeleteUser, dbGetUserById, dbgetUsers, dbnewUser, dbupdateUser } from "../services/user.services.js"
 
 const getUsers = async (req, res) => {
     try {
@@ -19,6 +19,28 @@ const getUsers = async (req, res) => {
         });
     }
 }
+const getUserById =async( req,res)=>{
+
+
+  try {
+    const id = req.params.id;
+
+        const data = await dbGetUserById(id)
+        res.json({
+            msg: 'listar usuarios',
+            data: data
+        })
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({
+            msg: 'no se obtiene infromacion de los usuarios'
+        });
+    }
+
+}
+
+
 const deleteUser = async (req, res) => {
     try {
         const id = req.params.id;
@@ -66,9 +88,8 @@ const newUser = async (req, res) => {
 
         inputData.password = encryptedPassword(inputData.password);
         const data = await dbnewUser(inputData)
-
-        res.status(201).json({
-            msg: 'obtener nuevo usuario ',
+      
+            res.status(201).json({
             data: data
         })
 
@@ -96,7 +117,6 @@ const newUser = async (req, res) => {
 
             const errorMessages = {
                 email: 'El correo electrónico ya se encuentra registrado por otro usuario',
-                nickname: 'El nickname ya se encuentra en uso por otro usuario'
             };
 
             return res.status(400).json({
@@ -112,4 +132,4 @@ const newUser = async (req, res) => {
 }
 
 
-export { getUsers, deleteUser, updateUser, newUser };
+export { getUsers, deleteUser, updateUser, newUser, getUserById};

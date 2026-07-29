@@ -10,6 +10,14 @@ export const ROLES = {
 }
 
 //retorna una listado de los roles permitidos 
+//estructura 
+export const ROLE_LABELS ={
+    [ROLES.ADMIN] : 'Administrador',
+    [ROLES.EDITOR] : 'Editor',
+    [ROLES.AUTHOR] : 'Autor',
+    [ROLES.SUBSCRIBER] :'Subscriptor'
+
+}
 
 export const AllOWEB_ROLES = Object.values(ROLES);
 

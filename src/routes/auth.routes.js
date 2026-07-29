@@ -13,7 +13,7 @@ const router = Router();
 // login 
 router.post('/login', loginUser)
 // registrer
-router.post('/register', removeRole, newUser)
+router.post('/register', newUser )
 
 
 //renew token 

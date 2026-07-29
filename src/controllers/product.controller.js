@@ -25,7 +25,7 @@ const deleteproductos = async (req, res) => {
         const data = await dbDeleteproducts(id);
         //validacion 
 
-        if (data) {
+        if (!data){
             return res.json(
                 {
                     msg: "No se puede eliminar un producto que no se encuentra registrado"
