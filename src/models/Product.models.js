@@ -15,11 +15,15 @@ const ProductSchema = new Schema({
         default: 0,
         min: 0
     },
-    status : {
+    urlImage: {
+        type: String,
+        default: null
+    },
+    status: {
         type: String,
         enum: ALLOWED_PRODUCT_STATUS,
-        default : PRODUCT_STATUS.AVAIABLE
-    }, 
+        default: PRODUCT_STATUS.AVAIABLE
+    },
 
     createBy: {
         type: Schema.Types.ObjectId,
