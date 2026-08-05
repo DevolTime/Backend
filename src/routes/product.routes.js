@@ -11,22 +11,22 @@ const router = Router();
 // define rutas para productos
 
 
-router.get ("/" , getproducts) ;
+router.get("/", getproducts);
 
 router.get("/:id",
-    //[authenticationUser,autorizationUser([ROLES.ADMIN])], 
+    [authenticationUser, autorizationUser([ROLES.ADMIN])],
     getproductsById);
 
-router.delete ("/:id",
-    //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])], 
+router.delete("/:id",
+    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],
     deleteproductos);
 
-router.post ("/", upload.single('urlImage'),
-    //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],
+router.post("/", upload.single('urlImage'),
+    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],
     postproducts);
 
 router.patch("/:id", upload.single('urlImage'),
-    //[authenticationUser,autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],  
-    patchproducts );
+    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR])],
+    patchproducts);
 
 export default router;
