@@ -45,7 +45,6 @@ const userShema = new Schema({
     // },
     role: {
         type: String,
-        required: true,
         enum: AllOWEB_ROLES,
         default: ROLES.SUBSCRIBER
 
