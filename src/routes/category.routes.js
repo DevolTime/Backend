@@ -23,25 +23,23 @@ router.get('/', getCategory);
 
 
 // Usa 'upload.single('image')' para procesar el archivo bajo la clave 'image'
-router.post('/', upload.single('image'), createCategory
-    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])], 
+router.post('/', upload.single('image'), createCategory,
+    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])],
 );
 
 router.get('/:id',
-    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])], 
+    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])],
     getCategoryById
 );
 
-router.delete('/:id',
-    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])], 
+router.delete('/:id', [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])],
     deleteCategory
 );
 
 
 // Permite subir una nueva imagen reemplazando la anterior
 
-router.patch('/:id', upload.single('image'),
-    //[authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])], 
+router.patch('/:id', upload.single('image'), [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR])],
     updateCategory
 );
 

@@ -11,12 +11,12 @@ import { ROLES } from "../config/global.config.js";
 
 router.post('/',
     //[authenticationUser,autorizationUser([ROLES.ADMIN])],
-     newUser)
-     
-router.get('/',//[authenticationUser,autorizationUser([ROLES.ADMIN])]
-getUsers)
+    newUser)
 
-router.get('/:id',getUserById)
+router.get('/',//[authenticationUser,autorizationUser([ROLES.ADMIN])]
+    getUsers)
+
+router.get('/:id', getUserById)
 
 router.delete('/:id',
     // [authenticationUser,autorizationUser([ROLES.ADMIN])],
@@ -24,6 +24,6 @@ router.delete('/:id',
 
 router.patch('/:id',
     //[authenticationUser,autorizationUser([ROLES.ADMIN])],
-     updateUser)
+    updateUser)
 
 export default router;
