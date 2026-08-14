@@ -5,7 +5,7 @@ const insertproduct = async (newProduct) => {
 
 }
 const dbGetproducts = async () => {
-    return await ProductModel.find();
+    return await ProductModel.find().populate('category', 'name');
 }
 const dbGetproductsById = async (id) => {
     return await ProductModel.findById(id);
