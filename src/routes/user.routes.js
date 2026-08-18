@@ -13,10 +13,14 @@ router.post('/',newUser)
      
 router.get('/',[authenticationUser,autorizationUser([ROLES.ADMIN])],getUsers)
 
-router.get('/:id',getUserById)
+router.get('/',//[authenticationUser,autorizationUser([ROLES.ADMIN])]
+    getUsers)
+
+router.get('/:id', getUserById)
 
 router.delete('/:id', [authenticationUser,autorizationUser([ROLES.ADMIN])], deleteUser)
 
 router.patch('/:id',[authenticationUser,autorizationUser([ROLES.ADMIN])],updateUser)
+
 
 export default router;
