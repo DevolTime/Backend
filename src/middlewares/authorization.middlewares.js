@@ -14,12 +14,12 @@ const autorizationUser = (alloweRoles = []) => {
             //paso 2 verificar si el rol de usuario esta en la lista de roles permitidos 
 
             if (!alloweRoles.includes(role)) {
+                console.log(`El rol ${role} no esta autorizado para esta acción`);
                 return res.status(403).json({
                     msg: `el rol${role}. no esta autorzado ppara esaa acciom`
                 })
             }
-            console.log(`El rol ${role} no esta autorizado para esta acción`);
-            // paso 3qacceso a coNTROLADORE
+            // paso 3 acceso a controladores
             next();
 
         } catch (error) {
@@ -34,7 +34,7 @@ const autorizationUser = (alloweRoles = []) => {
             console.error(error);
             res.status(500).json({
 
-                msg: "eeror en la autorizacion del servidor"
+                msg: "error en la autorizacion del servidor"
 
             })
         }

@@ -1,22 +1,26 @@
 import mongoose from "mongoose";
-import { dbCreateCart, dbDeleteCart, dbGetCart, dbGetCartById, dbUpdateCart } from "../services/cart.service.js";
+import { dbCreateCart, dbDeleteCart, dbGetCart, dbGetCartById, dbUpdateCart, dbClearCart, dbRemoveItemFromCart, dbAddItemToCart } from "../services/cart.service.js";
 
 const getCart = async (req, res) => {
-
     try {
-        const data = await dbGetCart();
+        const userId = req.user._id;
+        const data = await dbGetCart(userId);
+        if (!data) {
+            return res.status(404).json({
+                msg: 'El usuario no tiene carrito'
+            });
+        }
         res.json({
-            msg: 'Lista de Carrito',
-            data: data
-        })
+            msg: 'Carrito encontrado',
+            data
+        });
     } catch (error) {
         console.error(error);
-
         res.status(500).json({
             msg: 'No se pudo obtener el carrito'
-        })
+        });
     }
-}
+};
 
 const getCartById = async (req, res) => {
     try {
@@ -25,7 +29,7 @@ const getCartById = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 msg: 'El id proporcionado es invalido'
-            })
+            });
         }
 
         const data = await dbGetCartById(id);
@@ -33,21 +37,22 @@ const getCartById = async (req, res) => {
         if (!data) {
             return res.status(404).json({
                 msg: 'Carrito no encontrado'
-            })
+            });
         }
+
         res.json({
-            mssg: 'Carrito encontrado',
+            msg: 'Carrito encontrado',
             data: data
-        })
+        });
+
     } catch (error) {
         console.error(error);
 
-
         res.status(500).json({
-            msg: 'No se pudo obtener el Carrito'
-        })
+            msg: 'No se pudo obtener el carrito'
+        });
     }
-}
+};
 
 const createCart = async (req, res) => {
     try {
@@ -72,27 +77,33 @@ const updateCart = async (req, res) => {
         const id = req.params.id;
         const inputData = req.body;
 
-        const data = await dbUpdateCart(id, inputData)
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                msg: 'El id proporcionado es invalido'
+            });
+        }
+
+        const data = await dbUpdateCart(id, inputData);
+
+        if (!data) {
+            return res.status(404).json({
+                msg: 'Carrito no encontrado'
+            });
+        }
 
         res.json({
             msg: 'Carrito actualizado',
-            data: data
-        })
+            data
+        });
+
     } catch (error) {
         console.error(error);
 
-        if (error.name === 'CastError') {
-            return res.status(400).json({
-                msg: 'No se pudo Actualizar el carrito ya que el ID es invalido'
-            })
-        }
-
         res.status(500).json({
-            msg: 'No se pudo actualizar el Carrito por su id'
-        })
+            msg: 'No se pudo actualizar el carrito'
+        });
     }
 };
-
 
 const DeleteCart = async (req, res) => {
     try {
@@ -102,25 +113,101 @@ const DeleteCart = async (req, res) => {
                 msg: 'el id proporcionado es invalido'
             })
         }
-
         const data = await dbDeleteCart(id);
         if (!data) {
-            return res.status(400).json({
+            return res.status(404).json({
                 msg: 'Carrito no encontrado'
             })
         }
-
         res.json({
             msg: "Carrito eliminado",
             data
         });
     } catch (error) {
         console.error(error);
-
         res.status(500).json({
             msg: "No se pudo eliminar el carrito"
         });
     }
 };
 
-export { getCart, getCartById, createCart, updateCart, DeleteCart }
+const addItemToCart = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { productId } = req.body;
+        if (!productId) {
+            return res.status(400).json({
+                msg: 'El productId es obligatorio'
+            });
+        }
+        const data = await dbAddItemToCart(userId, productId);
+        res.status(200).json({
+            msg: 'Producto agregado al carrito correctamente',
+            data
+        });
+    } catch (error) {
+        console.error(error);
+        if (error.message === 'PRODUCT_NOT_FOUND') {
+            return res.status(404).json({
+                msg: 'El producto no existe'
+            });
+        }
+        res.status(500).json({
+            msg: 'No se pudo agregar el producto al carrito'
+        });
+    }
+};
+
+const removeItemFromCart = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { productId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            return res.status(400).json({
+                msg: 'El productId proporcionado es invalido'
+            });
+        }
+
+        const data = await dbRemoveItemFromCart(userId, productId);
+
+        if (!data) {
+            return res.status(404).json({
+                msg: 'El usuario no tiene carrito'
+            });
+        }
+
+        res.json({
+            msg: 'Producto eliminado del carrito',
+            data
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'No se pudo eliminar el producto del carrito'
+        });
+    }
+};
+
+const clearCart = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const data = await dbClearCart(userId);
+        if (!data) {
+            return res.status(404).json({
+                msg: 'Carrito no encontrado'
+            });
+        }
+        res.json({
+            msg: 'Carrito vaciado correctamente',
+            data
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'No se pudo vaciar el carrito'
+        });
+    }
+};
+
+export { getCart, getCartById, createCart, updateCart, DeleteCart, addItemToCart, removeItemFromCart, clearCart };
