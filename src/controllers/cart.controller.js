@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { dbCreateCart, dbDeleteCart, dbGetCart, dbGetCartById, dbUpdateCart, dbClearCart, dbRemoveItemFromCart, dbAddItemToCart } from "../services/cart.service.js";
+import { dbCreateCart, dbDeleteCart, dbGetCart, dbGetCartById, dbUpdateCart, dbClearCart, dbRemoveItemFromCart, dbAddItemToCart, dbUpdateItemQuantity } from "../services/cart.service.js";
 
 const getCart = async (req, res) => {
     try {
@@ -74,16 +74,23 @@ const createCart = async (req, res) => {
 
 const updateCart = async (req, res) => {
     try {
-        const id = req.params.id;
-        const inputData = req.body;
+        const userId = req.user._id;
+        const productId = req.params.productId;
+        const { quantity } = req.body;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
             return res.status(400).json({
-                msg: 'El id proporcionado es invalido'
+                msg: 'El id del producto es invalido'
             });
         }
 
-        const data = await dbUpdateCart(id, inputData);
+        if (quantity === undefined || isNaN(quantity)) {
+            return res.status(400).json({
+                msg: 'La cantidad es obligatoria'
+            });
+        }
+
+        const data = await dbUpdateItemQuantity(userId, productId, Number(quantity));
 
         if (!data) {
             return res.status(404).json({
