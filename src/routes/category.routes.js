@@ -28,7 +28,6 @@ router.post('/', upload.single('image'), createCategory,
 );
 
 router.get('/:id',
-    [authenticationUser, autorizationUser([ROLES.ADMIN, ROLES.EDITOR, ROLES.AUTHOR, ROLES.SUBSCRIBER])],
     getCategoryById
 );
 
