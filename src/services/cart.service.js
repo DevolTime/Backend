@@ -105,6 +105,37 @@ const dbClearCart = async (userId) => {
     );
 };
 
+// ACTUALIZAR CANTIDAD DE UN ITEM DEL CARRITO
+const dbUpdateItemQuantity = async (userId, productId, quantity) => {
+    const cart = await CartModel.findOne({ user: userId });
+
+    if (!cart) {
+        return null;
+    }
+
+    const item = cart.items.find(
+        item => item.product.toString() === productId.toString()
+    );
+
+    if (!item) {
+        return null;
+    }
+
+    // Si la cantidad es 0 o negativa, eliminar el item del carrito
+    if (!quantity || quantity <= 0) {
+        cart.items = cart.items.filter(
+            i => i.product.toString() !== productId.toString()
+        );
+    } else {
+        item.quantity = quantity;
+    }
+
+    await cart.save();
+
+    return await CartModel.findById(cart._id)
+        .populate('items.product');
+};
+
 export {
     dbCreateCart,
     dbGetCart,
@@ -113,5 +144,6 @@ export {
     dbDeleteCart,
     dbAddItemToCart,
     dbRemoveItemFromCart,
-    dbClearCart
+    dbClearCart,
+    dbUpdateItemQuantity
 };
