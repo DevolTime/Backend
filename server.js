@@ -23,10 +23,18 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Las respuestas de la API no deben cachearse ni revalidarse con ETag:
+// un 304 hace que el navegador devuelva el cuerpo cacheado (posiblemente vacío).
+app.disable('etag');
+app.use('/api', (req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
+
 // Middlewares Globales
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 // Servidor de Archivos Estáticos (para acceder a /uploads/products/imagen.png)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

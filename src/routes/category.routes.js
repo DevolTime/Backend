@@ -42,4 +42,4 @@ router.patch('/:id', upload.single('image'), [authenticationUser, autorizationUs
     updateCategory
 );
 
-export default router;
+export default router;  
