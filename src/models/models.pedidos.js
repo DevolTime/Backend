@@ -92,13 +92,20 @@ const pedidosSchema = new Schema({
         enum: [
 
             "Pendiente",
+            "pendiente",
             "Confirmado",
+            "confirmado",
             "En preparación",
             "Listo para recoger",
             "En camino",
             "Entregado",
+            "entregado",
             "Pedido retrasado",
-            "Pedido cancelado"
+            "Pedido cancelado",
+            "disponible",
+            "no disponible",
+            "refactorizar",
+            "enviado"
 
         ],
 
