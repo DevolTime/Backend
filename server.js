@@ -32,7 +32,16 @@ app.use('/api', (req, res, next) => {
 });
 
 // Middlewares Globales
-app.use(cors());
+// Middlewares Globales
+app.use(cors({
+  origin: [
+    'http://localhost:4200', // Para cuando desarrolles en local
+    'https://front-end-cinco.vercel.app', // Cambia esto por la URL real que te asignó Vercel
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
