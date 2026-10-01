@@ -36,7 +36,7 @@ app.use('/api', (req, res, next) => {
 app.use(cors({
   origin: [
     'http://localhost:4200', // Para cuando desarrolles en local
-    'https://front-end-cinco.vercel.app', // Cambia esto por la URL real que te asignó Vercel
+    'https://front-end-mu-olive.vercel.app/', // Cambia esto por la URL real que te asignó Vercel
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
